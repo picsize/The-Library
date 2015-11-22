@@ -1,5 +1,5 @@
 function getStoryById(id, category) {
-
+    localStorage.setItem('folderName', cat);
     $.ajax(
 	{
 	    type: 'POST',
@@ -13,6 +13,7 @@ function getStoryById(id, category) {
 	    },
 	    success: function (data) {
 	        alert('data:\n' + JSON.stringify(data));
+	       
 	        storeInPhone(data);
 	        storyData = data;
 	        //alert(data.time[2][1]);

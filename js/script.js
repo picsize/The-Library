@@ -128,7 +128,8 @@ function onPause() {
 document.addEventListener("deviceready", function () {
 
     //create the main dir
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) { onRequestFileSystemSuccess(fileSystem, 'TheLibrary'); }, null);
+    localStorage.setItem('folderName', 'TheLibrary');
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
 
     //Exit function
     $(".exit_button").click(function (e) {
@@ -1427,9 +1428,14 @@ function fail(evt) {
 
 //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
 
-function onRequestFileSystemSuccess(fileSystem, dirName) {
-    var entry = fileSystem.root;
-    entry.getDirectory(dirName, { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
+function onRequestFileSystemSuccess(fileSystem) {
+    var entry = '';
+    if (localStorage.getItem('folderName') == 'TheLibrary') {
+        entry = fileSystem.root;
+    } else {
+        entry = fileSystem.root + '/TheLibrary/';
+    }
+    entry.getDirectory(localStorage.getItem('folderName'), { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
 }
 
 function onGetDirectorySuccess(dir) {
