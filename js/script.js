@@ -1388,15 +1388,13 @@ function gotoStoryList() {
 }
 
 function storeInPhone(data, category, id) {
-    alert(JSON.stringify(data));
-    alert(category);
-    alert(id);
-    alert(mainURL + category + '/story' + id + '/');
     var fm = new FileManager();
     for (var i = 0; i < data.length; i++) {
-        if (data[i].indexOf('.jpg') || data[i].indexOf('.mp3')) {
+        if (data[i].indexOf('.jpg') !=-1 || data[i].indexOf('.mp3') !=-1) {
             fm.download_file(mainURL + category + '/story' + id + '/' + data[i], 'TheLibrary/' + category + '/story' + id, data[i], Log('downloaded'));
         }
     }
-    alert('all finish');
+
+    storyData = data;
+    setStory(data);
 }

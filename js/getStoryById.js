@@ -14,11 +14,10 @@ function getStoryById(id, category) {
 	        alert(JSON.stringify(errorThrown));
 	    },
 	    success: function (data) {
-	        //alert('data:\n' + JSON.stringify(data));
+	        alert('data:\n' + JSON.stringify(data));
 	       
 	        storeInPhone(data, category, id);
-	        //storyData = data;
-	        //setStory(data);
+	       
 	    }
 	});
 }
