@@ -1394,11 +1394,6 @@ function downloadFile() {
 
 }
 
-function onRequestFileSystemMainFolderSuccess(fileSystem) {
-    var entry = fileSystem.root;
-    entry.getDirectory('TheLibrary', { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
-}
-
 function onFileSystemSuccess(fileSystem) {
     alert('onFileSystemSuccess');
     fileSystem.root.getFile(
@@ -1412,13 +1407,13 @@ function onFileSystemSuccess(fileSystem) {
                               "http://www.w3.org/2011/web-apps-ws/papers/Nitobi.pdf",
                               sPath + "theFile.pdf",
                               function (theFile) {
-                                  console.log("download complete: " + theFile.toURI());
-                                  showLink(theFile.toURI());
+                                  alert("download complete: " + theFile.toURI());
+                                  //showLink(theFile.toURI());
                               },
                               function (error) {
-                                  console.log("download error source " + error.source);
-                                  console.log("download error target " + error.target);
-                                  console.log("upload error code: " + error.code);
+                                  alert("download error source " + error.source);
+                                  alert("download error target " + error.target);
+                                  alert("upload error code: " + error.code);
                               }
                               );
                 },
@@ -1431,8 +1426,6 @@ function fail(evt) {
 }
 
 
-//window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
-
 function onRequestFileSystemSuccess(fileSystem) {
     var entry = '';
     if (localStorage.getItem('folderName') == 'TheLibrary') { 
@@ -1440,6 +1433,7 @@ function onRequestFileSystemSuccess(fileSystem) {
     } else {
         entry = fileSystem.root + '/TheLibrary/';
     }
+    alert(JSON.stringify(entry));
     entry.getDirectory(localStorage.getItem('folderName'), { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
 }
 
