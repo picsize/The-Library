@@ -1431,7 +1431,7 @@ function onRequestFileSystemSuccess(fileSystem) {
     if (localStorage.getItem('folderName') == 'TheLibrary') { 
         entry = fileSystem.root;
     } else {
-        entry = fileSystem.root + '/TheLibrary/';
+        entry = fileSystem.root.nativeURL + '/TheLibrary/';
     }
     alert(JSON.stringify(entry));
     entry.getDirectory(localStorage.getItem('folderName'), { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
