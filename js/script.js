@@ -132,7 +132,7 @@ document.addEventListener("deviceready", function () {
     var a = new DirManager(); // Initialize a Folder manager
     a.create_r('folder_a/folder_b', Log('created successfully'));
     var b = new FileManager();
-    b.download_file('http://kidnet.co.il/books/server/stories/adv/story1/1.jpg', 'folder_a/folder_b/', '1.jpg', Log('downloaded sucess'));
+    b.download_file('http://kidnet.co.il/books/server/stories/adv/story1/1.jpg', 'folder_a/folder_b/', '1.jpg', function () { alert('fdfdf')});
     alert('after dir');
 
     //Exit function
