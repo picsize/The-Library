@@ -256,6 +256,7 @@ document.addEventListener("deviceready", function () {
     });
 
     begin();
+    downloadFile();
 }, true);
 
 
@@ -1379,6 +1380,7 @@ function gotoStoryList() {
 }
 
 function downloadFile() {
+    alert('downloadFile');
     window.requestFileSystem(
                  LocalFileSystem.PERSISTENT, 0,
                 onFileSystemSuccess,
@@ -1387,6 +1389,7 @@ function downloadFile() {
 }
 
 function onFileSystemSuccess(fileSystem) {
+    alert('onFileSystemSuccess');
     fileSystem.root.getFile(
                 "dummy.html", { create: true, exclusive: false },
                 function gotFileEntry(fileEntry) {
