@@ -5,7 +5,7 @@ function getStoryById(id, category) {
 	    type: 'POST',
 	    url: 'http://www.kidnet.co.il/books/server/server.php',
 	    dataType: 'json',
-	    data: { request: 30, id: id, cat: category },
+	    data: { request: 31, id: id, cat: category },
 	    error: function (XMLHttpRequest, textStatus, errorThrown) {
 	        alert(textStatus);
 	        alert(JSON.stringify(XMLHttpRequest));
