@@ -1381,17 +1381,18 @@ function gotoStoryList() {
 
 function downloadFile() {
     alert('downloadFile');
-    window.requestFileSystem(
-                 LocalFileSystem.PERSISTENT, 0,
-                onFileSystemSuccess,
-                 fail);
+    //window.requestFileSystem(
+    //             LocalFileSystem.PERSISTENT, 0,
+    //            onFileSystemSuccess,
+    //             fail);
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
 
 }
 
 function onFileSystemSuccess(fileSystem) {
     alert('onFileSystemSuccess');
     fileSystem.root.getFile(
-                "dummy.html", { create: true, exclusive: false },
+                "TheLibrary/dummy.html", { create: true, exclusive: false },
                 function gotFileEntry(fileEntry) {
                     var sPath = fileEntry.fullPath.replace("dummy.html", "");
                     var fileTransfer = new FileTransfer();
@@ -1427,4 +1428,20 @@ function showLink(url) {
 
 function fail(evt) {
     console.log(evt.target.error.code);
+}
+
+
+window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
+
+function onRequestFileSystemSuccess(fileSystem) {
+    var entry = fileSystem.root;
+    entry.getDirectory("TheLibrary", { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
+}
+
+function onGetDirectorySuccess(dir) {
+    alert("Created dir " + dir.name);
+}
+
+function onGetDirectoryFail(error) {
+    console.log("Error creating directory " + error.code);
 }
