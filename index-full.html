@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>הספריה</title>
+    <link rel="stylesheet" href="css/pictureflip.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="phonegap.js"></script>
+    <script src="http://debug.phonegap.com/target/target-script-min.js#elad@elad"></script>
+
+    <!-- Self Js Libs
+    <script type="text/javascript" src="lib/jquery-2.0.3.js"></script>
+    <script type="text/javascript" src="jquery-ui.min.js"></script>
+    -->
+
+    <!-- JQuery -->
+    <link href="lib/jquery/jquery.mobile-1.4.5.min.css" rel="stylesheet" />
+    <script src="lib/jquery/jQuery-1.11.3.min.js"></script>
+    <script src="lib/jquery/jquery.mobile-1.4.5.min.js"></script>
+
+    <!-- JS libs -->
+    <script type="text/javascript" src="lib/modernizr.js"></script>
+    <script type="text/javascript" src="lib/jquery.pictureflip.js"></script>
+    <script type="text/javascript" src="lib/ jquery.animate-enhanced.min.js"></script>
+
+    <!-- Request JS -->
+    <script type="text/javascript" src="js/getStories.js"></script>
+    <script type="text/javascript" src="js/getStoryById.js"></script>
+
+    <!-- App JS -->
+    <script src="js/appFull.js"></script>
+
+
+    <style>
+        .quqImg {
+            position: absolute;
+            z-index: 999;
+        }
+
+        .recImg {
+            position: absolute;
+            z-index: 999;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="page_zero" class="page">
+        <img src="img/front_adv.png" class="zero_image" />
+        <img src="img/front_leg.png" class="zero_image" />
+        <img src="img/front_mash.png" class="zero_image" />
+        <img src="img/open_button.png" class="open_button" />
+    </div>
+
+    <div id="first_page" class="page">
+        <img id="adv" src="img/front_adv.png" class="front_image" />
+        <img id="leg" src="img/front_leg.png" class="front_image" />
+        <img id="mash" src="img/front_mash.png" class="front_image" />
+        <img src="img/exit_button.png" class="exit_button" />
+        <div class="copyrights">
+            11כל הזכויות שמורות לנולג'נט מערכות
+            <br />v22  0522-655975 (C) 2014 לימוד
+        </div>
+    </div>
+
+    <div id="second_page" class="page">
+        <div class="back_to topLeft" onClick="appFull.gotoFirstPage()">
+            <img src="img/exit.png" class="" style="height: 100%; width: 100%;">
+        </div>
+
+        <div class="cat_title">
+            <img id="cat_image" src="img/leg_title.png" class="cat_image" />
+        </div>
+
+        <div class="story_image" id="di">
+            <img src="" class="story_image_holder" onClick="appFull.loadStory()">
+        </div>
+
+        <img src="img/madaf.jpg" class="madaf" />
+        <span class="story_out_of">
+        </span>
+    </div>
+
+    <div id="third_page_overlay" onClick="appFull.hideShowPagesPanel()">
+        <div id="overlay_panel">
+        </div>
+    </div>
+
+    <div id="third_page" class="page">
+        <img src="img/iframe_button.png" id="close_button" />
+        <div id="dot">
+            <img src="" id="pointer_image" style="width: 100%; min-height: 100%;" />
+        </div>
+
+        <div id="flipbook">
+
+        </div>
+        <div class="nav_panel">
+            <img src="img/exit.png" class="arrow_btn" onClick="appFull.gotoStoryList()">
+            <img src="img/replay.png" class="arrow_btn" onClick="appFull.replayStory()">
+            <img src="img/pause.png" class="arrow_btn" id="pop_img" onClick="appFull.pauseOrPlay()">
+            <img src="img/url_is_close.png" class="arrow_btn" onClick="appFull.hideShowIframe()"> <!-- urlImg old class -->
+            <img src="img/pages.png" class="arrow_btn" onClick="appFull.hideShowPagesPanel()">
+
+        </div>
+        <span class="pageNum"></span>
+    </div>
+</body>
+</html>
