@@ -1391,11 +1391,11 @@ function gotoStoryList() {
 
 function storeInPhone(data, category, id) {
     for (var i = 0; i < data['images'].length; i++) {
-        fm.download_file(mainURL + category + '/story' + id + '/' + data[i], 'TheLibrary/' + category + '/story' + id, data[i], Log('downloaded'));
+        fm.download_file(mainURL + category + '/story' + id + '/' + data['images'][i], 'TheLibrary/' + category + '/story' + id, data['images'][i], Log('downloaded'));
     }
 
     for (var i = 0; i < data['sound'].length; i++) {
-        fm.download_file(mainURL + category + '/story' + id + '/' + data[i], 'TheLibrary/' + category + '/story' + id, data[i], Log('downloaded'));
+        fm.download_file(mainURL + category + '/story' + id + '/' + data['sound'][i], 'TheLibrary/' + category + '/story' + id, data['sound'][i], Log('downloaded'));
     }
 
     storyData = data;
