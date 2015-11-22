@@ -47,8 +47,8 @@
   <gap:plugin name="org.apache.cordova.media" />
 
   <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-  <gap:plugin name="cordova-plugin-file" source="npm" />
-  <gap:plugin name="cordova-plugin-file-transfer" source="npm" />
+  <!--<gap:plugin name="cordova-plugin-file" source="npm" />
+  <gap:plugin name="cordova-plugin-file-transfer" source="npm" />-->
 
   <preference name="permissions" value="none"/>
 
