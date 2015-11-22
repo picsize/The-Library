@@ -1,4 +1,6 @@
-﻿var url1_width;
+﻿var mainURL = 'http://kidnet.co.il/books/server/stories/';
+
+var url1_width;
 var url1_height;
 var url2_width;
 var url2_height;
@@ -73,6 +75,7 @@ var frame;
 var imgS1 = document.createElement('img');
 var imgS2 = document.createElement('img');
 
+
 //Backbutton click
 document.addEventListener("backbutton", onBackKeyDown, false);
 function onBackKeyDown(e) {
@@ -128,12 +131,8 @@ function onPause() {
 document.addEventListener("deviceready", function () {
 
     //create the main dir
-    localStorage.setItem('folderName', 'TheLibrary');
-    var a = new DirManager(); // Initialize a Folder manager
-    a.create_r('folder_a/folder_b', Log('created successfully'));
-    var b = new FileManager();
-    b.download_file('http://kidnet.co.il/books/server/stories/adv/story1/1.jpg', 'folder_a/folder_b/', '1.jpg', function () { alert('fdfdf')});
-    alert('after dir');
+    var dm = new DirManager(); // Initialize a Folder manager
+    dm.create_r('TheLibrary', Log('created successfully'));
 
     //Exit function
     $(".exit_button").click(function (e) {
@@ -1388,5 +1387,12 @@ function gotoStoryList() {
 
 }
 
-
-
+function storeInPhone(data, category, id) {
+    var fm = new FileManager();
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].indexOf('.jpg') || data[i].indexOf('.mp3')) {
+            b.download_file(mainURL + category + '/story' + id + '/' + data[i], 'TheLibrary/' + category + '/story' + id, data[i], function () { Log('downloaded') });
+        }
+    }
+    alert('all finish');
+}
