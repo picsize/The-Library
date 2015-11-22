@@ -129,7 +129,9 @@ document.addEventListener("deviceready", function () {
 
     //create the main dir
     localStorage.setItem('folderName', 'TheLibrary');
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
+    var a = new DirManager(); // Initialize a Folder manager
+    a.create_r('folder_a/folder_b', Log('created successfully'));
+    alert('after dir');
 
     //Exit function
     $(".exit_button").click(function (e) {
@@ -1382,72 +1384,6 @@ function gotoStoryList() {
         });
     }
 
-}
-
-function downloadFile() {
-    alert('downloadFile');
-    //window.requestFileSystem(
-    //             LocalFileSystem.PERSISTENT, 0,
-    //            onFileSystemSuccess,
-    //             fail);
-    //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
-
-}
-
-function onFileSystemSuccess(fileSystem) {
-    alert('onFileSystemSuccess');
-    fileSystem.root.getFile(
-                "TheLibrary/dummy.html", { create: true, exclusive: false },
-                function gotFileEntry(fileEntry) {
-                    var sPath = fileEntry.fullPath.replace("dummy.html", "");
-                    var fileTransfer = new FileTransfer();
-                    fileEntry.remove();
-
-                    fileTransfer.download(
-                              "http://www.w3.org/2011/web-apps-ws/papers/Nitobi.pdf",
-                              sPath + "theFile.pdf",
-                              function (theFile) {
-                                  alert("download complete: " + theFile.toURI());
-                                  //showLink(theFile.toURI());
-                              },
-                              function (error) {
-                                  alert("download error source " + error.source);
-                                  alert("download error target " + error.target);
-                                  alert("upload error code: " + error.code);
-                              }
-                              );
-                },
-                fail);
-}
-
-
-function fail(evt) {
-    console.log(evt.target.error.code);
-}
-
-
-function onRequestFileSystemSuccess(fileSystem) {
-    var entry = '';
-    if (localStorage.getItem('folderName') == 'TheLibrary') { 
-        entry = fileSystem.root;
-    } else {
-        entry = fileSystem.root.nativeURL + '/TheLibrary/';
-    }
-    alert(JSON.stringify(entry));
-    entry.getDirectory(localStorage.getItem('folderName'), { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
-}
-
-function onGetDirectorySuccess(dir) {
-    alert("Created dir " + dir.name);
-}
-
-function onGetDirectoryFail(error) {
-    console.log("Error creating directory " + error.code);
-}
-
-function storeInPhone(data) {
-    //create the cat directory
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
 }
 
 
