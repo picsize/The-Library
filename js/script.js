@@ -1398,6 +1398,10 @@ function storeInPhone(data, category, id) {
         fm.download_file(mainURL + category + '/story' + id + '/' + data['sound'][i], 'TheLibrary/' + category + '/story' + id, data['sound'][i], Log('downloaded'));
     }
 
+    //fm.read_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", Log('file contents: '), Log('something went wrong'));
+
+    fm.read_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", function () { alert('file contents: ') }, function () { alert('something went wrong') });
+
     storyData = data;
     setStory(data);
 }
