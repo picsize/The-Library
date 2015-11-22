@@ -1117,8 +1117,8 @@ function setStory(dataSend) {
         $("#pop_img").attr('src', 'img/pause.png');
 
         //Media src
-        //var voiceSrc = fm.read_file('TheLibrary/' + category + "/story" + currentStory + "/", storyPage + ".mp3", Log('file contents: '), Log('something went wrong'));
-        var voiceSrc = "http://www.kidnet.co.il/books/server/stories/" + category + "/story" + currentStory + "/" + storyPage + ".mp3";
+        var voiceSrc = fm.load_file('TheLibrary/' + category + "/story" + currentStory + "/", storyPage + ".mp3", Log('file contents: '), Log('something went wrong'));
+        //var voiceSrc = "http://www.kidnet.co.il/books/server/stories/" + category + "/story" + currentStory + "/" + storyPage + ".mp3";
 
         //Check if replay or new play
         if (replayFlag) {
@@ -1400,7 +1400,7 @@ function storeInPhone(data, category, id) {
 
     //fm.read_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", Log('file contents: '), Log('something went wrong'));
 
-    fm.load_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", function () { alert('file contents: ') }, function () { alert('something went wrong') });
+    //fm.load_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", function () { alert('file contents: ') }, function () { alert('something went wrong') });
 
     storyData = data;
     setStory(data);
