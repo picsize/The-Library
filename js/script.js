@@ -128,8 +128,13 @@ function onPause() {
 document.addEventListener("deviceready", function () {
 
     //create the main dir
-    localStorage.setItem('folderName', 'TheLibrary');
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
+    //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemMainFolderSuccess, null);
+
+    // Now create your directories like:
+    var main_dir = "story_repository/" ;
+    fileGetDir(mainDir + "/rec", printSuccess);
+    fileGetDir(mainDir + "/img", printSuccess);
+    fileGetDir("story_repository/", printSuccess);
 
     //Exit function
     $(".exit_button").click(function (e) {
@@ -261,7 +266,7 @@ document.addEventListener("deviceready", function () {
     });
 
     begin();
-    downloadFile();
+    //downloadFile();
 }, true);
 
 
@@ -1394,6 +1399,11 @@ function downloadFile() {
 
 }
 
+function onRequestFileSystemMainFolderSuccess(fileSystem) {
+    var entry = fileSystem.root;
+    entry.getDirectory('TheLibrary', { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
+}
+
 function onFileSystemSuccess(fileSystem) {
     alert('onFileSystemSuccess');
     fileSystem.root.getFile(
@@ -1450,6 +1460,47 @@ function storeInPhone(data, cat, id) {
     //create the cat directory
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) { onRequestFileSystemSuccess(fileSystem, 'TheLibrary/' + cat); }, null);
 }
+
+
+
+
+var fsroot = fileSystem.root; // initialize this
+
+function fileGetDir(path, cb) {
+    var fnGetOrCreateDir = function (p, de) {
+        var entry = p.shift();
+        if (entry) {
+            de.getDirectory(entry, {
+                create: true
+            }, function (dirEntry) {
+                fnGetOrCreateDir(p, dirEntry);
+            }, fileFSError);
+        }
+        else
+            if (cb) cb(de);
+    };
+
+    if (path) {
+        var arPath = path.split("/");
+        fnGetOrCreateDir(arPath, fsroot);
+    }
+    else {
+        if (cb) cb(fsroot);
+    }
+}
+
+function fileFSError(e) {
+    console.log(e.code);
+    try {
+        console.log("fileFSError: " + JSON.stringify(e));
+    } catch (err) { }
+}
+
+function printSuccess(dirEntry) {
+    console.log(dirEntry.fullPath);
+}
+
+
 
 
 
