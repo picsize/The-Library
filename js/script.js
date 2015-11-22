@@ -1400,8 +1400,9 @@ function storeInPhone(data, category, id) {
 
     //fm.read_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", Log('file contents: '), Log('something went wrong'));
 
-    fm.read_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", function () { alert('file contents: ') }, function () { alert('something went wrong') });
+    fm.load_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", function () { alert('file contents: ') }, function () { alert('something went wrong') });
 
     storyData = data;
     setStory(data);
 }
+
