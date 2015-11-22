@@ -297,7 +297,7 @@ function blinkTheImage() {
 }
 
 function myTimer() {
-    myVar2 = setTimeout(function () { alert("אות אינטרנט חלש !"); }, 5000);
+    myVar2 = setTimeout(function () { alert("אות אינטרנט חלש !"); }, 6000);
 }
 
 
@@ -1117,8 +1117,7 @@ function setStory(dataSend) {
         $("#pop_img").attr('src', 'img/pause.png');
 
         //Media src
-        var voiceSrc = fm.load_file('TheLibrary/' + category + "/story" + currentStory + "/", storyPage + ".mp3", Log('file contents: '), Log('something went wrong'));
-        //var voiceSrc = "http://www.kidnet.co.il/books/server/stories/" + category + "/story" + currentStory + "/" + storyPage + ".mp3";
+        var voiceSrc = "http://www.kidnet.co.il/books/server/stories/" + category + "/story" + currentStory + "/" + storyPage + ".mp3";
 
         //Check if replay or new play
         if (replayFlag) {
