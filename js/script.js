@@ -1415,16 +1415,6 @@ function onFileSystemSuccess(fileSystem) {
                 fail);
 }
 
-function showLink(url) {
-    alert(url);
-    var divEl = document.getElementById("ready");
-    var aElem = document.createElement("a");
-    aElem.setAttribute("target", "_blank");
-    aElem.setAttribute("href", url);
-    aElem.appendChild(document.createTextNode("Ready! Click To Open."))
-    divEl.appendChild(aElem);
-
-}
 
 function fail(evt) {
     console.log(evt.target.error.code);
@@ -1439,7 +1429,7 @@ function onRequestFileSystemSuccess(fileSystem) {
 }
 
 function onGetDirectorySuccess(dir) {
-    alert("Created dir " + dir.name);
+    console.log("Created dir " + dir.name);
 }
 
 function onGetDirectoryFail(error) {

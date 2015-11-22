@@ -12,6 +12,7 @@ function getStoryById(id, category) {
 	        alert(JSON.stringify(errorThrown));
 	    },
 	    success: function (data) {
+	        alert('data:\n' + JSON.stringify(data));
 	        storyData = data;
 	        //alert(data.time[2][1]);
 	        setStory(data);
