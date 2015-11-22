@@ -126,6 +126,10 @@ function onPause() {
 
 //On Device ready function
 document.addEventListener("deviceready", function () {
+
+    //create the main dir
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) { onRequestFileSystemSuccess(fileSystem, 'TheLibrary'); }, null);
+
     //Exit function
     $(".exit_button").click(function (e) {
         var result = confirm("האם אתה בטוח שברצונך לצאת?");
@@ -1421,17 +1425,27 @@ function fail(evt) {
 }
 
 
-window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
+//window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
 
-function onRequestFileSystemSuccess(fileSystem) {
+function onRequestFileSystemSuccess(fileSystem, dirName) {
     var entry = fileSystem.root;
-    entry.getDirectory("TheLibrary", { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
+    entry.getDirectory(dirName, { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
 }
 
 function onGetDirectorySuccess(dir) {
-    console.log("Created dir " + dir.name);
+    alert("Created dir " + dir.name);
 }
 
 function onGetDirectoryFail(error) {
     console.log("Error creating directory " + error.code);
 }
+
+function storeInPhone(data, cat, id) {
+    //create the cat directory
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) { onRequestFileSystemSuccess(fileSystem, 'TheLibrary/' + cat); }, null);
+}
+
+
+
+
+
