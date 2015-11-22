@@ -128,7 +128,8 @@ function onPause() {
 document.addEventListener("deviceready", function () {
 
     //create the main dir
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemMainFolderSuccess, null);
+    localStorage.setItem('folderName', 'TheLibrary');
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
 
     //Exit function
     $(".exit_button").click(function (e) {
@@ -1434,7 +1435,7 @@ function fail(evt) {
 
 function onRequestFileSystemSuccess(fileSystem) {
     var entry = '';
-    if (localStorage.getItem('folderName') == 'TheLibrary') {
+    if (localStorage.getItem('folderName') == 'TheLibrary') { 
         entry = fileSystem.root;
     } else {
         entry = fileSystem.root + '/TheLibrary/';
@@ -1450,9 +1451,9 @@ function onGetDirectoryFail(error) {
     console.log("Error creating directory " + error.code);
 }
 
-function storeInPhone(data, cat, id) {
+function storeInPhone(data) {
     //create the cat directory
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) { onRequestFileSystemSuccess(fileSystem, 'TheLibrary/' + cat); }, null);
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, null);
 }
 
 

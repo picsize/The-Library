@@ -1,5 +1,5 @@
 function getStoryById(id, category) {
-    localStorage.setItem('folderName', cat);
+    localStorage.setItem('folderName', category);
     $.ajax(
 	{
 	    type: 'POST',
