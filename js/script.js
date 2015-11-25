@@ -1035,6 +1035,10 @@ function setPagesScroll() {
 
 //Core function - Sets the story by the daa sent from server.
 function setStory(dataSend) {
+
+    alert(JSON.stringify(storyObject.images));
+    alert(JSON.stringify(storyObject.sounds));
+
     //Check if data is not null
     if (dataSend == null) {
         dataSend = data;
@@ -1395,18 +1399,20 @@ function gotoStoryList() {
 function storeInPhone(data, category, id) {
     for (var i = 0; i < data['images'].length; i++) {
         fm.download_file(mainURL + category + '/story' + id + '/' + data['images'][i], 'TheLibrary/' + category + '/story' + id, data['images'][i], function (res) {
-            alert(res.nativeURL);
+            var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+            storyObject.images.number = res.nativeURL
         });
     }
 
     for (var i = 0; i < data['sound'].length; i++) {
         fm.download_file(mainURL + category + '/story' + id + '/' + data['sound'][i], 'TheLibrary/' + category + '/story' + id, data['sound'][i], function (res) {
-            alert(res.nativeURL);
+            var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+            storyObject.images.sounds = res.nativeURL
         });
     }
 
-    alert(JSON.stringify(storyObject.images));
-    alert(JSON.stringify(storyObject.sounds));
+    //alert(JSON.stringify(storyObject.images));
+    //alert(JSON.stringify(storyObject.sounds));
     //fm.load_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", function (e) { alert('file contents: \n' + JSON.stringify(e)) }, function () { alert('something went wrong') });
 
     storyData = data;
