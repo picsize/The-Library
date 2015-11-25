@@ -1398,7 +1398,7 @@ function storeInPhone(data, category, id) {
     }
 
     for (var i = 0; i < data['sound'].length; i++) {
-        fm.download_file(mainURL + category + '/story' + id + '/' + data['sound'][i], 'TheLibrary/' + category + '/story' + id, data['sound'][i], Log('downloaded'));
+        fm.download_file(mainURL + category + '/story' + id + '/' + data['sound'][i], 'TheLibrary/' + category + '/story' + id, data['sound'][i], function (e) {JSON.stringify(e)});
     }
 
     //fm.read_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", Log('file contents: '), Log('something went wrong'));
