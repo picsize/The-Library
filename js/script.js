@@ -1394,14 +1394,19 @@ function gotoStoryList() {
 
 function storeInPhone(data, category, id) {
     for (var i = 0; i < data['images'].length; i++) {
-        fm.download_file(mainURL + category + '/story' + id + '/' + data['images'][i], 'TheLibrary/' + category + '/story' + id, data['images'][i], Log('downloaded'));
+        fm.download_file(mainURL + category + '/story' + id + '/' + data['images'][i], 'TheLibrary/' + category + '/story' + id, data['images'][i], function (res) {
+            storyObject.images[data['images'][i]] = res.nativeURL;
+        });
     }
 
     for (var i = 0; i < data['sound'].length; i++) {
-        fm.download_file(mainURL + category + '/story' + id + '/' + data['sound'][i], 'TheLibrary/' + category + '/story' + id, data['sound'][i], function (e) { alert(JSON.stringify(e)); });
+        fm.download_file(mainURL + category + '/story' + id + '/' + data['sound'][i], 'TheLibrary/' + category + '/story' + id, data['sound'][i], function (res) {
+            storyObject.sounds[data['sound'][i]] = res.nativeURL;
+        });
     }
 
-
+    alert(JSON.stringify(storyObject.images));
+    alert(JSON.stringify(storyObject.sounds));
     //fm.load_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", function (e) { alert('file contents: \n' + JSON.stringify(e)) }, function () { alert('something went wrong') });
 
     storyData = data;
