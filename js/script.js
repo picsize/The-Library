@@ -1,5 +1,9 @@
 ﻿var mainURL = 'http://kidnet.co.il/books/server/stories/';
 var fm = new FileManager();
+var storyObject = {
+    images: {},
+    sounds: {}
+}
 
 var url1_width;
 var url1_height;
@@ -1399,7 +1403,7 @@ function storeInPhone(data, category, id) {
 
     //fm.read_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", Log('file contents: '), Log('something went wrong'));
 
-    //fm.load_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", function () { alert('file contents: ') }, function () { alert('something went wrong') });
+    fm.load_file('TheLibrary/' + category + "/story" + id + "/", 5 + ".mp3", function (e) { alert('file contents: \n' + JSON.stringify(e)) }, function () { alert('something went wrong') });
 
     storyData = data;
     setStory(data);
