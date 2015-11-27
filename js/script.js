@@ -1,8 +1,8 @@
 ﻿var mainURL = 'http://kidnet.co.il/books/server/stories/';
 var fm = new FileManager();
 var storyObject = {
-    images: {},
-    sounds: {}
+    images: [],
+    sounds: []
 }
 
 var url1_width;
@@ -1397,17 +1397,21 @@ function gotoStoryList() {
 }
 
 function storeInPhone(data, category, id) {
+    storyObject.images = [];
+    storyObject.sounds = [];
+
+
     for (var i = 0; i < data['images'].length; i++) {
         fm.download_file(mainURL + category + '/story' + id + '/' + data['images'][i], 'TheLibrary/' + category + '/story' + id, data['images'][i], function (res) {
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-            storyObject.images.number = res.nativeURL
+            storyObject.images.push({ id: number, url: res.nativeURL });
         });
     }
 
     for (var i = 0; i < data['sound'].length; i++) {
         fm.download_file(mainURL + category + '/story' + id + '/' + data['sound'][i], 'TheLibrary/' + category + '/story' + id, data['sound'][i], function (res) {
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-            storyObject.images.sounds = res.nativeURL
+            storyObject.sounds.push({ id: number, url: res.nativeURL });
         });
     }
 
