@@ -1433,9 +1433,10 @@ function storeInPhone(data, category, id) {
             });
         }
 
-        checkDownloadStatus = setInterval(function (cd) { status(cd) }, 3000);
+        checkDownloadStatus = setInterval(function (cb) { status(cb) }, 3000);
 
-        function status(cd) {
+        function status(cb) {
+            alert(isFinishedImg + ' ' + isFinishedSnd);
             if (isFinishedImg && isFinishedSnd) {
                 $('#quqImg').remove();
                 clearInterval(checkDownloadStatus);
