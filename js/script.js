@@ -1397,9 +1397,6 @@ function gotoStoryList() {
 }
 
 function storeInPhone(data, category, id) {
-    var progressBar = '<div class="quqImg" style="width:60%; height:50px; border:1px solid black; top:40%; left:10%;">' +
-                            '<div id="progress-bar" class="quqImg" style="width:100%; background-color:#fff; height:45px; color:#000;"></div>' +
-                      '</div>';
 
     storyObject.images = [];
     storyObject.sounds = [];
@@ -1434,28 +1431,27 @@ function storeInPhone(data, category, id) {
             });
         }
 
-        checkDownloadStatus = setInterval(function (done_callback) { status(done_callback) }, 1000);
+        checkDownloadStatus = setInterval(status, 1000);
 
-        function status(cb) {
+        var status = function () {
             alert('img: ' + isFinishedImg + ' and sound: ' + isFinishedSnd);
             if (isFinishedImg && isFinishedSnd) {
-                $('.quqImg').remove();
+                playTheStory();
                 clearInterval(checkDownloadStatus);
-                cb();
             }
         }     
     }
 
 
-    var playTheStory = function(){
+    var playTheStory = function () {
+        //storyData = data;
+        //setStory(data);
         alert(JSON.stringify(storyObject.images));
         alert(JSON.stringify(storyObject.sounds));
     }
     
-    $('body').append(progressBar);
     downloadStoryFiles(data, category, id, playTheStory);
 
-    //storyData = data;
-    //setStory(data);
+    
 }
 
