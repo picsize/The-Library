@@ -161,6 +161,8 @@ document.addEventListener("deviceready", function () {
         path = path.substr(path, path.length - 10);
         var pathOfFile = 'file://' + path;
 
+        alert(pathOfFile);
+
         //Plays first song
         openMedia = new Media(pathOfFile + 'song.mp3');
         openMedia.play();
@@ -1397,7 +1399,7 @@ function gotoStoryList() {
 }
 
 function storeInPhone(data, category, id) {
-    var progressBar = '<div class="quqImg" style="width:100%; height:50px; border:1px solid black; top:40%; left:43%">' +
+    var progressBar = '<div class="quqImg" style="width:100%; height:50px; border:1px solid black; top:40%; left:0;">' +
                             '<div id="progress-bar" style="width:0; background-color:#000; height:45px;"></div>' +
                       '</div>';
 
