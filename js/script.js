@@ -1411,7 +1411,7 @@ function storeInPhone(data, category, id) {
         for (var i = 0; i < dataFromServer['images'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-                alert(number + ' ' + res.nativeURL);
+                //alert(number + ' ' + res.nativeURL);
                 storyObject.images.push({ id: number, url: res.nativeURL });
                 if (i >= dataFromServer['images'].length) {
                     isFinishedImg = true;
@@ -1422,7 +1422,7 @@ function storeInPhone(data, category, id) {
         for (var i = 0; i < dataFromServer['sound'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-                alert(number + ' ' + res.nativeURL);
+                //alert(number + ' ' + res.nativeURL);
                 storyObject.sounds.push({ id: number, url: res.nativeURL });
                 if (i >= dataFromServer['images'].length) {
                     isFinishedSnd = true;
