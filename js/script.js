@@ -270,7 +270,7 @@ document.addEventListener("deviceready", function () {
 
     begin();
     //downloadFile();
-}, true);
+}, false);
 
 
 $(document).ready(function (e) {
@@ -301,7 +301,12 @@ function blinkTheImage() {
 }
 
 function myTimer() {
-    myVar2 = setTimeout(function () { alert("אות אינטרנט חלש !"); }, 6000);
+    myVar2 = setTimeout(function () {
+        if (!confirm('הספרים עדיין בטעינה. האם להמתין?')) {
+            $.mobile.changePage('#first_page');
+        } 
+        //alert("אות אינטרנט חלש !");
+    }, 6000);
 }
 
 
@@ -404,7 +409,7 @@ function loadStory(storyNum) {
         currentStory = storyNum;
         clickFlag = true;
         clickMedia.play();
-        //showLoading();
+        showLoading();
         getStoryById(storyNum, category);
     }
 }
@@ -1125,7 +1130,9 @@ function setStory(dataSend) {
         $("#pop_img").attr('src', 'img/pause.png');
 
         //Media src
-        var voiceSrc = "http://www.kidnet.co.il/books/server/stories/" + category + "/story" + currentStory + "/" + storyPage + ".mp3";
+        //var voiceSrc = "http://www.kidnet.co.il/books/server/stories/" + category + "/story" + currentStory + "/" + storyPage + ".mp3";
+        alert(storyObject.sounds[storyPage].url);
+        var voiceSrc = storyObject.sounds[storyPage].url;
 
         //Check if replay or new play
         if (replayFlag) {
@@ -1428,20 +1435,22 @@ function storeInPhone(data, category, id) {
         }
 
         checkDownloadStatus = setInterval(function () {
-            alert('img: ' + isFinishedImg + ' and sound: ' + isFinishedSnd);
+            if (isFinishedImg) {
+                alert();
+            }
             if (isFinishedImg && isFinishedSnd) {
                 done_callback();
                 clearInterval(checkDownloadStatus);
             }
-        }, 1000);
+        }, 2000);
     }
 
 
     var playTheStory = function () {
-        //storyData = data;
-        //setStory(data);
-        alert(JSON.stringify(storyObject.images));
-        alert(JSON.stringify(storyObject.sounds));
+        storyData = data;
+        setStory(data);
+        //alert(JSON.stringify(storyObject.images));
+        //alert(JSON.stringify(storyObject.sounds));
     }
 
     downloadStoryFiles(data, category, id, playTheStory);
