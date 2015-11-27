@@ -1402,7 +1402,7 @@ function storeInPhone(data, category, id) {
     storyObject.sounds = [];
 
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
-        
+
         var isFinishedImg = false;
         var isFinishedSnd = false;
         var done_callback = cb;
@@ -1431,15 +1431,13 @@ function storeInPhone(data, category, id) {
             });
         }
 
-        checkDownloadStatus = setInterval(status, 1000);
-
-        var status = function () {
+        checkDownloadStatus = setInterval(function () {
             alert('img: ' + isFinishedImg + ' and sound: ' + isFinishedSnd);
             if (isFinishedImg && isFinishedSnd) {
-                playTheStory();
+                done_callback();
                 clearInterval(checkDownloadStatus);
             }
-        }     
+        }, 1000);
     }
 
 
@@ -1449,9 +1447,9 @@ function storeInPhone(data, category, id) {
         alert(JSON.stringify(storyObject.images));
         alert(JSON.stringify(storyObject.sounds));
     }
-    
+
     downloadStoryFiles(data, category, id, playTheStory);
 
-    
+
 }
 
