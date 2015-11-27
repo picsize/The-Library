@@ -1397,8 +1397,8 @@ function gotoStoryList() {
 }
 
 function storeInPhone(data, category, id) {
-    var progressBar = '<div style="width:100%; height:50px; border:1px solid black;">' +
-                            '<div id="progress-bar" style="width:0; background-color:#000;height:45px;"></div>' +
+    var progressBar = '<div class="quqImg" style="width:100%; height:50px; border:1px solid black; top:40%; left:43%">' +
+                            '<div id="progress-bar" style="width:0; background-color:#000; height:45px;"></div>' +
                       '</div>';
 
     storyObject.images = [];
@@ -1434,7 +1434,7 @@ function storeInPhone(data, category, id) {
         }
 
         if (isFinishedImg && isFinishedSnd) {
-            $('#progress-bar').remove();
+            $('#quqImg').remove();
             cb();
         }
     }
