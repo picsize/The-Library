@@ -1408,6 +1408,7 @@ function storeInPhone(data, category, id) {
         
         var isFinishedImg = false;
         var isFinishedSnd = false;
+        var done_callback = cb;
 
         for (var i = 0; i < dataFromServer['images'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
@@ -1433,12 +1434,12 @@ function storeInPhone(data, category, id) {
             });
         }
 
-        checkDownloadStatus = setInterval(function (cb) { status(cb) }, 3000);
+        checkDownloadStatus = setInterval(function (done_callback) { status(done_callback) }, 1000);
 
         function status(cb) {
-            alert(isFinishedImg + ' ' + isFinishedSnd);
+            alert('img: ' + isFinishedImg + ' and sound: ' + isFinishedSnd);
             if (isFinishedImg && isFinishedSnd) {
-                $('#quqImg').remove();
+                $('.quqImg').remove();
                 clearInterval(checkDownloadStatus);
                 cb();
             }
