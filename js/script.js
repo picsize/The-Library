@@ -161,8 +161,6 @@ document.addEventListener("deviceready", function () {
         path = path.substr(path, path.length - 10);
         var pathOfFile = 'file://' + path;
 
-        alert(pathOfFile);
-
         //Plays first song
         openMedia = new Media(pathOfFile + 'song.mp3');
         openMedia.play();
@@ -1399,8 +1397,8 @@ function gotoStoryList() {
 }
 
 function storeInPhone(data, category, id) {
-    var progressBar = '<div class="quqImg" style="width:100%; height:50px; border:1px solid black; top:40%; left:0;">' +
-                            '<div id="progress-bar" style="width:0; background-color:#000; height:45px;"></div>' +
+    var progressBar = '<div class="quqImg" style="width:60%; height:50px; border:1px solid black; top:40%; left:10%;">' +
+                            '<div id="progress-bar" style="width:100%; background-color:#fff; height:45px;"></div>' +
                       '</div>';
 
     storyObject.images = [];
@@ -1414,7 +1412,8 @@ function storeInPhone(data, category, id) {
         for (var i = 0; i < dataFromServer['images'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-                $('#progress-bar').css('width', (i * 100 / dataFromServer['images'].length) / 2 + '%').html(dataFromServer['images'][i]);
+                //$('#progress-bar').css('width', (i * 100 / dataFromServer['images'].length) / 2 + '%').html(dataFromServer['images'][i]);
+                $('#progress-bar').html(dataFromServer['images'][i]);
                 //alert(number + ' ' + res.nativeURL);
                 storyObject.images.push({ id: number, url: res.nativeURL });
                 if (i >= dataFromServer['images'].length) {
@@ -1427,7 +1426,8 @@ function storeInPhone(data, category, id) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 //alert(number + ' ' + res.nativeURL);
-                $('#progress-bar').css('width', (i * 100 / dataFromServer['sound'].length) / 2 + '%').html(dataFromServer['sound'][i]);
+                //$('#progress-bar').css('width', (i * 100 / dataFromServer['sound'].length) / 2 + '%').html(dataFromServer['sound'][i]);
+                $('#progress-bar').html(dataFromServer['sound'][i]);
                 storyObject.sounds.push({ id: number, url: res.nativeURL });
                 if (i >= dataFromServer['images'].length) {
                     isFinishedSnd = true;
@@ -1435,10 +1435,15 @@ function storeInPhone(data, category, id) {
             });
         }
 
-        if (isFinishedImg && isFinishedSnd) {
-            $('#quqImg').remove();
-            cb();
-        }
+        checkDownloadStatus = setInterval(function (cd) { status(cd) }, 3000);
+
+        function status(cd) {
+            if (isFinishedImg && isFinishedSnd) {
+                $('#quqImg').remove();
+                clearInterval(checkDownloadStatus);
+                cb();
+            }
+        }     
     }
 
 
