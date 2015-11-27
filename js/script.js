@@ -1398,7 +1398,7 @@ function gotoStoryList() {
 
 function storeInPhone(data, category, id) {
     var progressBar = '<div class="quqImg" style="width:60%; height:50px; border:1px solid black; top:40%; left:10%;">' +
-                            '<div id="progress-bar" style="width:100%; background-color:#fff; height:45px;"></div>' +
+                            '<div id="progress-bar" class="quqImg" style="width:100%; background-color:#fff; height:45px; color:#000;"></div>' +
                       '</div>';
 
     storyObject.images = [];
@@ -1412,10 +1412,8 @@ function storeInPhone(data, category, id) {
         for (var i = 0; i < dataFromServer['images'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-                //$('#progress-bar').css('width', (i * 100 / dataFromServer['images'].length) / 2 + '%').html(dataFromServer['images'][i]);
                 $('#progress-bar').html(dataFromServer['images'][i]);
-                //alert(number + ' ' + res.nativeURL);
-                storyObject.images.push({ id: number, url: res.nativeURL });
+                storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
                 if (i >= dataFromServer['images'].length) {
                     isFinishedImg = true;
                 }
@@ -1428,7 +1426,7 @@ function storeInPhone(data, category, id) {
                 //alert(number + ' ' + res.nativeURL);
                 //$('#progress-bar').css('width', (i * 100 / dataFromServer['sound'].length) / 2 + '%').html(dataFromServer['sound'][i]);
                 $('#progress-bar').html(dataFromServer['sound'][i]);
-                storyObject.sounds.push({ id: number, url: res.nativeURL });
+                storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
                 if (i >= dataFromServer['images'].length) {
                     isFinishedSnd = true;
                 }
