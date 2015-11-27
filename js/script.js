@@ -404,7 +404,7 @@ function loadStory(storyNum) {
         currentStory = storyNum;
         clickFlag = true;
         clickMedia.play();
-        showLoading();
+        //showLoading();
         getStoryById(storyNum, category);
     }
 }
@@ -1397,20 +1397,22 @@ function gotoStoryList() {
 }
 
 function storeInPhone(data, category, id) {
+    var progressBar = '<div style="width:100%; height:50px; border:1px solid black;">' +
+                            '<div id="progress-bar" style="width:0; background-color:#000;height:45px;"></div>' +
+                      '</div>';
+
     storyObject.images = [];
     storyObject.sounds = [];
 
-    //var dataFromServer = data;
-    //var storyCat = category;
-    //var storyId = id;
-
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
+        
         var isFinishedImg = false;
         var isFinishedSnd = false;
 
         for (var i = 0; i < dataFromServer['images'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+                $('#progress-bar').css('width', (i * 100 / dataFromServer['images'].length) / 2 + '%').html(dataFromServer['images'][i]);
                 //alert(number + ' ' + res.nativeURL);
                 storyObject.images.push({ id: number, url: res.nativeURL });
                 if (i >= dataFromServer['images'].length) {
@@ -1423,6 +1425,7 @@ function storeInPhone(data, category, id) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 //alert(number + ' ' + res.nativeURL);
+                $('#progress-bar').css('width', (i * 100 / dataFromServer['sound'].length) / 2 + '%').html(dataFromServer['sound'][i]);
                 storyObject.sounds.push({ id: number, url: res.nativeURL });
                 if (i >= dataFromServer['images'].length) {
                     isFinishedSnd = true;
@@ -1431,6 +1434,7 @@ function storeInPhone(data, category, id) {
         }
 
         if (isFinishedImg && isFinishedSnd) {
+            $('#progress-bar').remove();
             cb();
         }
     }
@@ -1441,6 +1445,7 @@ function storeInPhone(data, category, id) {
         alert(JSON.stringify(storyObject.sounds));
     }
     
+    $('body').append(progressBar);
     downloadStoryFiles(data, category, id, playTheStory);
 
     //storyData = data;
