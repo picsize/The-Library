@@ -1435,10 +1435,9 @@ function storeInPhone(data, category, id) {
         }
 
         checkDownloadStatus = setInterval(function () {
-            if (isFinishedImg) {
-                alert();
-            }
             if (isFinishedImg && isFinishedSnd) {
+                storyObject.images.sort(sortArray);
+                storyObject.sounds.sort(sortArray);
                 done_callback();
                 clearInterval(checkDownloadStatus);
             }
@@ -1457,4 +1456,14 @@ function storeInPhone(data, category, id) {
 
 
 }
+
+function sortArray(a, b) {
+    if (a.id < b.id)
+        return -1;
+    if (a.id > b.id)
+        return 1;
+    return 0;
+}
+
+
 
