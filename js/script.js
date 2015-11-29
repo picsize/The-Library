@@ -1131,7 +1131,8 @@ function setStory(dataSend) {
 
         //Media src
         //var voiceSrc = "http://www.kidnet.co.il/books/server/stories/" + category + "/story" + currentStory + "/" + storyPage + ".mp3";
-        alert(storyObject.sounds[storyPage-1].url);
+        alert(storyPage);
+        //alert(storyObject.sounds[storyPage-1].url);
         var voiceSrc = storyObject.sounds[storyPage-1].url;
 
         //Check if replay or new play
