@@ -1417,9 +1417,11 @@ function storeInPhone(data, category, id) {
 
         for (var i = 0; i < dataFromServer['images'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
+                alert('image: ' + res.nativeURL);
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
-                fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], dataFromServer['sound'][i], function () {
+                fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function () {
+                    alert('sound: ' + res.nativeURL);
                     var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                     storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
                     if (i >= dataFromServer['sound'].length) {
