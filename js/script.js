@@ -301,10 +301,13 @@ function blinkTheImage() {
 }
 
 function myTimer() {
-    myVar2 = setTimeout(function () {
-        if (!confirm('הספרים עדיין בטעינה. האם להמתין?')) {
+    myVar2 = setInterval(function () {
+        if (confirm('הספרים עדיין בטעינה. האם להמתין?')) {
+           
+        } else {
             $.mobile.changePage('#first_page');
-        } 
+            hideLoading();
+        }
         //alert("אות אינטרנט חלש !");
     }, 6000);
 }
@@ -325,7 +328,7 @@ function showLoading() {
 
 //Hide loading
 function hideLoading() {
-    clearTimeout(myVar2);
+    clearInterval(myVar2);
     $(".quqImg").remove();
     $.mobile.loading("hide");
 }
