@@ -301,14 +301,11 @@ function blinkTheImage() {
 }
 
 function myTimer() {
-    myVar2 = setInterval(function () {
-        if (confirm('הספרים עדיין בטעינה. האם להמתין?')) {
-           
-        } else {
-            $.mobile.changePage('#first_page');
-            hideLoading();
-        }
-        //alert("אות אינטרנט חלש !");
+    myVar2 = setTimeout(function () {
+        //if (!confirm('הספרים עדיין בטעינה. האם להמתין?')) {
+        //    $.mobile.changePage('#first_page');
+        //} 
+        alert("אות אינטרנט חלש !");
     }, 6000);
 }
 
@@ -328,7 +325,7 @@ function showLoading() {
 
 //Hide loading
 function hideLoading() {
-    clearInterval(myVar2);
+    clearTimeout(myVar2);
     $(".quqImg").remove();
     $.mobile.loading("hide");
 }
@@ -412,7 +409,7 @@ function loadStory(storyNum) {
         currentStory = storyNum;
         clickFlag = true;
         clickMedia.play();
-        showLoading();
+        //showLoading();
         getStoryById(storyNum, category);
     }
 }
@@ -1136,7 +1133,7 @@ function setStory(dataSend) {
         //var voiceSrc = "http://www.kidnet.co.il/books/server/stories/" + category + "/story" + currentStory + "/" + storyPage + ".mp3";
         alert(storyPage);
         //alert(storyObject.sounds[storyPage-1].url);
-        var voiceSrc = storyObject.sounds[storyPage-1].url;
+        var voiceSrc = storyObject.sounds[storyPage - 1].url;
 
         //Check if replay or new play
         if (replayFlag) {
@@ -1418,15 +1415,29 @@ function storeInPhone(data, category, id) {
         var isFinishedSnd = false;
         var done_callback = cb;
 
+       
+
         for (var i = 0; i < dataFromServer['images'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
                 //alert('image: ' + res.nativeURL);
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
+                $.mobile.loading("show", {
+                    text: res.nativeURL,
+                    textVisible: true,
+                    theme: "a",
+                    html: ""
+                });
                 fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
                     //alert('sound: ' + res.nativeURL);
                     var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                     storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
+                    $.mobile.loading("show", {
+                        text: res.nativeURL,
+                        textVisible: true,
+                        theme: "a",
+                        html: ""
+                    });
                     if (i >= dataFromServer['sound'].length) {
                         isFinishedSnd = true;
                     }
@@ -1451,6 +1462,7 @@ function storeInPhone(data, category, id) {
             if (isFinishedImg && isFinishedSnd) {
                 storyObject.images.sort(sortArray);
                 storyObject.sounds.sort(sortArray);
+                $.mobile.loading("hide");
                 done_callback();
                 clearInterval(checkDownloadStatus);
             }
