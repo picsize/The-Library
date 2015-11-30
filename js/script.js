@@ -1416,10 +1416,10 @@ function storeInPhone(data, category, id) {
         var done_callback = cb;
 
         $.mobile.loading("show", {
-            text: '',
-            textVisible: false,
+            text: 'הסיפור כבר מגיע...',
+            textVisible: true,
             theme: "a",
-            html: '<p class="saving">הורדת הסיפור מתבצעת<span>.</span><span>.</span><span>.</span></p>'
+            html: ''
         });
 
         for (var i = 0; i < dataFromServer['sound'].length; i++) {
