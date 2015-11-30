@@ -1415,51 +1415,20 @@ function storeInPhone(data, category, id) {
         var isFinishedSnd = false;
         var done_callback = cb;
 
-
-
-        //for (var i = 0; i < dataFromServer['images'].length; i++) {
-        //    fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
-        //        //alert('image: ' + res.nativeURL);
-        //        var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-        //        storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
-        //        $.mobile.loading("show", {
-        //            text: res.nativeURL,
-        //            textVisible: true,
-        //            theme: "a",
-        //            html: ""
-        //        });
-        //        fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
-        //            //alert('sound: ' + res.nativeURL);
-        //            var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-        //            storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
-        //            $.mobile.loading("show", {
-        //                text: 'מוריד קובץ: ' + dataFromServer['sound'][i],
-        //                textVisible: true,
-        //                theme: "a",
-        //                html: ""
-        //            });
-        //            if (i >= dataFromServer['sound'].length) {
-        //                isFinishedSnd = true;
-        //            }
-        //        });
-        //        if (i >= dataFromServer['images'].length) {
-        //            isFinishedImg = true;
-        //        }
-        //    });
-        //}
-
         for (var i = 0; i < dataFromServer['sound'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+                var fileName = res.nativeURL.split('/')[res.nativeURL.split('/'.length) - 1];
                 storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
                 $.mobile.loading("show", {
-                    text: 'מוריד קובץ: ' + dataFromServer['sound'][i],
+                    text: fileName,
                     textVisible: true,
                     theme: "a",
                     html: ""
                 });
                 if (i >= dataFromServer['sound'].length) {
                     isFinishedSnd = true;
+                    $.mobile.loading("hide");
                 }
             });
         }
@@ -1467,15 +1436,17 @@ function storeInPhone(data, category, id) {
         for (var i = 0; i < dataFromServer['images'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+                var fileName = res.nativeURL.split('/')[res.nativeURL.split('/'.length) - 1];
                 storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
                 $.mobile.loading("show", {
-                    text: 'מוריד קובץ: ' + dataFromServer['images'][i],
+                    text: fileName,
                     textVisible: true,
                     theme: "a",
                     html: ""
                 });
                 if (i >= dataFromServer['images'].length) {
                     isFinishedSnd = true;
+                    $.mobile.loading("hide");
                 }
             });
         }
@@ -1486,7 +1457,6 @@ function storeInPhone(data, category, id) {
             if (isFinishedImg && isFinishedSnd) {
                 storyObject.images.sort(sortArray);
                 storyObject.sounds.sort(sortArray);
-                $.mobile.loading("hide");
                 done_callback();
                 clearInterval(checkDownloadStatus);
             }
