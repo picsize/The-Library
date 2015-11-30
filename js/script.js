@@ -4,6 +4,8 @@ var storyObject = {
     images: [],
     sounds: []
 }
+var soundRootStorage = '';
+var imageRootStorage = '';
 
 var url1_width;
 var url1_height;
@@ -1131,9 +1133,7 @@ function setStory(dataSend) {
 
         //Media src
         //var voiceSrc = "http://www.kidnet.co.il/books/server/stories/" + category + "/story" + currentStory + "/" + storyPage + ".mp3";
-        alert(storyPage);
-        //alert(storyObject.sounds[storyPage-1].url);
-        var voiceSrc = storyObject.sounds[storyPage - 1].url;
+        var voiceSrc = soundRootStorage + '/TheLibrary/' + category + '/story' + currentStory + '/' + storyPage + '.mp3';
 
         //Check if replay or new play
         if (replayFlag) {
@@ -1424,6 +1424,7 @@ function storeInPhone(data, category, id) {
 
         for (var i = 0; i < dataFromServer['sound'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
+                imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
                 if (i >= dataFromServer['sound'].length) {
@@ -1434,6 +1435,7 @@ function storeInPhone(data, category, id) {
 
         for (var i = 0; i < dataFromServer['images'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
+                soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
                 if (i >= dataFromServer['images'].length) {
@@ -1456,8 +1458,6 @@ function storeInPhone(data, category, id) {
     var playTheStory = function () {
         storyData = data;
         setStory(data);
-        //alert(JSON.stringify(storyObject.images));
-        //alert(JSON.stringify(storyObject.sounds));
     }
 
     downloadStoryFiles(data, category, id, playTheStory);
