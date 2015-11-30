@@ -1415,18 +1415,17 @@ function storeInPhone(data, category, id) {
         var isFinishedSnd = false;
         var done_callback = cb;
 
+        $.mobile.loading("show", {
+            text: '',
+            textVisible: false,
+            theme: "a",
+            html: '<p class="saving">הורדת הסיפור מתבצעת<span>.</span><span>.</span><span>.</span></p>'
+        });
+
         for (var i = 0; i < dataFromServer['sound'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-                var fileName = dataFromServer['sound'][i];
-                alert(fileName);
                 storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
-                $.mobile.loading("show", {
-                    text: fileName,
-                    textVisible: true,
-                    theme: "a",
-                    html: ""
-                });
                 if (i >= dataFromServer['sound'].length) {
                     isFinishedSnd = true;
                 }
@@ -1436,22 +1435,12 @@ function storeInPhone(data, category, id) {
         for (var i = 0; i < dataFromServer['images'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-                var fileName = dataFromServer['images'][i];
-                alert(fileName);
                 storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
-                $.mobile.loading("show", {
-                    text: fileName,
-                    textVisible: true,
-                    theme: "a",
-                    html: ""
-                });
                 if (i >= dataFromServer['images'].length) {
                     isFinishedImg = true;
                 }
             });
         }
-
-
 
         checkDownloadStatus = setInterval(function () {
             if (isFinishedImg && isFinishedSnd) {
@@ -1460,7 +1449,7 @@ function storeInPhone(data, category, id) {
                 done_callback();
                 clearInterval(checkDownloadStatus);
             }
-        }, 2000);
+        }, 10);
     }
 
 
