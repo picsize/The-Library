@@ -1419,6 +1419,7 @@ function storeInPhone(data, category, id) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 var fileName = res.nativeURL.split('/')[res.nativeURL.split('/'.length) - 1];
+                //alert(fileName);
                 storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
                 $.mobile.loading("show", {
                     text: fileName,
@@ -1428,7 +1429,6 @@ function storeInPhone(data, category, id) {
                 });
                 if (i >= dataFromServer['sound'].length) {
                     isFinishedSnd = true;
-                    $.mobile.loading("hide");
                 }
             });
         }
@@ -1437,6 +1437,7 @@ function storeInPhone(data, category, id) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 var fileName = res.nativeURL.split('/')[res.nativeURL.split('/'.length) - 1];
+                //alert(fileName);
                 storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
                 $.mobile.loading("show", {
                     text: fileName,
@@ -1445,8 +1446,7 @@ function storeInPhone(data, category, id) {
                     html: ""
                 });
                 if (i >= dataFromServer['images'].length) {
-                    isFinishedSnd = true;
-                    $.mobile.loading("hide");
+                    isFinishedImg = true;
                 }
             });
         }
