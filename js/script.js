@@ -1043,8 +1043,8 @@ function setPagesScroll() {
 //Core function - Sets the story by the daa sent from server.
 function setStory(dataSend) {
 
-    alert(JSON.stringify(storyObject.images));
-    alert(JSON.stringify(storyObject.sounds));
+    //alert(JSON.stringify(storyObject.images));
+    //alert(JSON.stringify(storyObject.sounds));
 
     //Check if data is not null
     if (dataSend == null) {
@@ -1134,23 +1134,26 @@ function setStory(dataSend) {
         //Media src
         var voiceSrc = '';
 
+        var playFile = function (src) {
+            //Check if replay or new play
+            if (replayFlag) {
+                if (playsound) myMedia.play();
+            }
+            else {
+                //If not replay then reset Media var
+                myMedia = null;
+                //if (playsound) { myMedia = new Media(voiceSrc,onSuccess, onError)};
+                myMedia = new Media(src, onSuccess, onError);
+            }
+        }
+
+
         try {
             voiceSrc = soundRootStorage + '/TheLibrary/' + category + '/story' + currentStory + '/' + storyPage + '.mp3';
+            playFile(voiceSrc);
         } catch (e) {
             voiceSrc = "http://www.kidnet.co.il/books/server/stories/" + category + "/story" + currentStory + "/" + storyPage + ".mp3";
-        }
-
-        alert(voiceSrc);
-
-        //Check if replay or new play
-        if (replayFlag) {
-            if (playsound) myMedia.play();
-        }
-        else {
-            //If not replay then reset Media var
-            myMedia = null;
-            //if (playsound) { myMedia = new Media(voiceSrc,onSuccess, onError)};
-            myMedia = new Media(voiceSrc, onSuccess, onError);
+            playFile(voiceSrc);
         }
 
         //Set timeout for initial 
