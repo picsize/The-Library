@@ -1426,6 +1426,7 @@ function storeInPhone(data, category, id) {
         for (var i = 0; i < dataFromServer['sound'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
                 imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+                alert(imageRootStorage);
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
                 if (i >= dataFromServer['sound'].length) {
@@ -1437,6 +1438,7 @@ function storeInPhone(data, category, id) {
         for (var i = 0; i < dataFromServer['images'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
                 soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+                alert(soundRootStorage);
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
                 if (i >= dataFromServer['images'].length) {
