@@ -665,7 +665,7 @@ function changeNextPage() {
 
 //Load prev files for story flip
 function changePrevPage() {
-    alert(imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg');
+    //alert(imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg');
     $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)');
 
     //Slide switching as in "ChangeNextPage()" function 
@@ -673,7 +673,7 @@ function changePrevPage() {
         case 1:
             $("#divS3").find('.img').css(
             {
-                'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                 'background-size': '100% 0px'
             });
             currentSlidePage = 3;
@@ -682,7 +682,7 @@ function changePrevPage() {
         case 2:
             $("#divS1").find('.img').css(
             {
-                'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                 'background-size': '100% 0px'
             });
             currentSlidePage--;
@@ -690,7 +690,7 @@ function changePrevPage() {
         case 3:
             $("#divS2").find('.img').css(
             {
-                'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                 'background-size': '100% 0px'
             });
             currentSlidePage--;
@@ -820,7 +820,7 @@ function jumpToPage(pageTo) {
 
             //Check if next page then applay normal NextPage method
         else if (pageTo == storyPage + 1) {
-            $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)');
+            $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)');
             storyPage = pageTo;
             $(".next").trigger("click");
             $(".nav_panel").fadeOut('fast');
@@ -842,7 +842,7 @@ function jumpToPage(pageTo) {
 
             //Check if prev page then applay normal PrevPage method
         else if (pageTo == storyPage - 1) {
-            $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)');
+            $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)');
             storyPage = pageTo;
             $(".prev").trigger("click");
             $(".nav_panel").fadeOut('fast');
@@ -869,61 +869,61 @@ function jumpToPage(pageTo) {
                 //Set story page and switch slides 
                 switch (currentSlidePage) {
                     case 1:
-                        $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + (storyPage + 2) + '.jpg)');
+                        $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 2) + '.jpg)');
                         $("#divS1").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                             'background-size': '100% 0px'
                         });
                         $("#divS2").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 1) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 1) + '.jpg)',
                             'background-size': '100% 0px'
                         });
 
                         $("#divS3").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 2) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 2) + '.jpg)',
                             'background-size': '100% 0px'
                         });
                         break;
 
                     case 2:
-                        $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + (storyPage + 1) + '.jpg)');
+                        $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 1) + '.jpg)');
                         $("#divS2").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                             'background-size': '100% 0px'
                         });
                         $("#divS3").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 1) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 1) + '.jpg)',
                             'background-size': '100% 0px'
                         });
 
                         $("#divS1").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 2) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 2) + '.jpg)',
                             'background-size': '100% 0px'
                         });
 
                         break;
                     case 3:
-                        $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)');
+                        $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)');
                         $("#divS3").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                             'background-size': '100% 0px'
                         });
                         $("#divS1").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 1) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 1) + '.jpg)',
                             'background-size': '100% 0px'
                         });
 
                         $("#divS2").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 2) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 2) + '.jpg)',
                             'background-size': '100% 0px'
                         });
                         break;
@@ -939,61 +939,61 @@ function jumpToPage(pageTo) {
                 //Set storyPage and switch slides
                 switch (currentSlidePage) {
                     case 1:
-                        $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)');
+                        $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)');
                         $("#divS1").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                             'background-size': '100% 0px'
                         });
                         $("#divS2").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 1) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 1) + '.jpg)',
                             'background-size': '100% 0px'
                         });
 
                         $("#divS3").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 2) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 2) + '.jpg)',
                             'background-size': '100% 0px'
                         });
                         break;
 
                     case 2:
-                        $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)');
+                        $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)');
                         $("#divS2").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                             'background-size': '100% 0px'
                         });
                         $("#divS3").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 1) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 1) + '.jpg)',
                             'background-size': '100% 0px'
                         });
 
                         $("#divS1").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 2) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 2) + '.jpg)',
                             'background-size': '100% 0px'
                         });
                         break;
 
                     case 3:
-                        $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)');
+                        $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)');
                         $("#divS3").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                             'background-size': '100% 0px'
                         });
                         $("#divS1").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 1) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 1) + '.jpg)',
                             'background-size': '100% 0px'
                         });
 
                         $("#divS2").find('.img').css(
                         {
-                            'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 2) + '.jpg)',
+                            'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 2) + '.jpg)',
                             'background-size': '100% 0px'
                         });
                         break;
@@ -1257,7 +1257,7 @@ function setStoryImage() {
     imgS1.id = 'imageS1';
     divS.className = 'slide';
     divS.id = 'divS1';
-    $(imgS1).attr('src', storyRoot + currentStory + '/' + 1 + '.jpg');
+    $(imgS1).attr('src', imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 1 + '.jpg');
     //$('#pointer_image').attr('src', storyRoot+currentStory+'/pointer.png');
     $('#pointer_image').attr('src', storyRoot_p + '/pointer.gif');
     divS.appendChild(imgS1);
@@ -1271,7 +1271,7 @@ function setStoryImage() {
     imgS1.id = 'imageS2';
     divS.className = 'slide';
     divS.id = 'divS2';
-    $(imgS1).attr('src', storyRoot + currentStory + '/' + 2 + '.jpg');
+    $(imgS1).attr('src', imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 2 + '.jpg');
     //$('#pointer_image').attr('src', storyRoot+currentStory+'/pointer.png');
     $('#pointer_image').attr('src', storyRoot_p + '/pointer.gif');
     divS.appendChild(imgS1);
@@ -1286,7 +1286,7 @@ function setStoryImage() {
     imgS1.id = 'imageS3';
     divS.className = 'slide';
     divS.id = 'divS3';
-    $(imgS1).attr('src', storyRoot + currentStory + '/' + 3 + '.jpg');
+    $(imgS1).attr('src', imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 3 + '.jpg');
     $(imgS1).css('visibility ', 'hidden');
     //$('#pointer_image').attr('src', storyRoot+currentStory+'/pointer.png');
     $('#pointer_image').attr('src', storyRoot_p + '/pointer.gif');
@@ -1301,7 +1301,7 @@ function setStoryImage() {
         //alert("loaded");
     }
 
-    $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + 3 + '.jpg)');
+    $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 3 + '.jpg)');
     $('#flipbook').css('background-size', "100% 100%");
     $('#flipbook').pageFlip();
 }
