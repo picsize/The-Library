@@ -1428,7 +1428,7 @@ function storeInPhone(data, category, id) {
     storyCatGlobal = category;
 
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
-        
+
         var isFinishedImg = false;
         var isFinishedSnd = false;
         var done_callback = cb;
@@ -1456,34 +1456,31 @@ function storeInPhone(data, category, id) {
                 }
             });
         }
+    }
 
-        var count = 10;
-        var loadComponents = function () {
-            if (count <= 0) {
-                if (isFinishedImg && isFinishedSnd) {
-                    storyObject.images.sort(sortArray);
-                    storyObject.sounds.sort(sortArray);
-                    done_callback();
-                } else {
-                    count = 10;
-                    setTimeout(loadComponents, 1000);
-                }
-            }
-            else {
-                count--;
-                $.mobile.loading("show", {
-                    //text: '(' + count + ')...' + 'הסיפור כבר מגיע',
-                    text:count,
-                    textVisible: true,
-                    theme: "a",
-                    html: ''
-                });
+    var count = 10;
+    var loadComponents = function () {
+        if (count <= 0) {
+            if (isFinishedImg && isFinishedSnd) {
+                storyObject.images.sort(sortArray);
+                storyObject.sounds.sort(sortArray);
+                done_callback();
+            } else {
+                count = 10;
                 setTimeout(loadComponents, 1000);
             }
         }
-        
+        else {
+            count--;
+            $.mobile.loading("show", {
+                text: '(' + count + ')...' + 'הסיפור כבר מגיע',
+                textVisible: true,
+                theme: "a",
+                html: ''
+            });
+            setTimeout(loadComponents, 1000);
+        }
     }
-
 
     var playTheStory = function () {
         storyData = data;
@@ -1492,6 +1489,7 @@ function storeInPhone(data, category, id) {
 
     downloadStoryFiles(data, category, id, playTheStory);
     loadComponents();
+
 }
 
 function sortArray(a, b) {
