@@ -1461,6 +1461,7 @@ function storeInPhone(data, category, id) {
     var count = 10;
     var loadComponents = function () {
         if (count <= 0) {
+            alert(isFinishedImg + ' ' + isFinishedSnd);
             if (isFinishedImg && isFinishedSnd) {
                 storyObject.images.sort(sortArray);
                 storyObject.sounds.sort(sortArray);
