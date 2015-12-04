@@ -1301,7 +1301,7 @@ function setStoryImage() {
         //alert("loaded");
     }
 
-    $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + 3 + '.jpg)');
+    $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 3 + '.jpg)');
     $('#flipbook').css('background-size', "100% 100%");
     $('#flipbook').pageFlip();
 }
