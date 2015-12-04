@@ -665,8 +665,8 @@ function changeNextPage() {
 
 //Load prev files for story flip
 function changePrevPage() {
-    alert(imageRootStorage + + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg');
-    $('#flipbook').attr('style', 'background:url(' + imageRootStorage + + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)');
+    alert(imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg');
+    $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)');
 
     //Slide switching as in "ChangeNextPage()" function 
     switch (currentSlidePage) {
