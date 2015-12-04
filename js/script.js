@@ -1257,7 +1257,7 @@ function setStoryImage() {
     imgS1.id = 'imageS1';
     divS.className = 'slide';
     divS.id = 'divS1';
-    $(imgS1).attr('src', imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 1 + '.jpg');
+    $(imgS1).attr('src', storyRoot + currentStory + '/' + 1 + '.jpg');
     //$('#pointer_image').attr('src', storyRoot+currentStory+'/pointer.png');
     $('#pointer_image').attr('src', storyRoot_p + '/pointer.gif');
     divS.appendChild(imgS1);
@@ -1271,7 +1271,7 @@ function setStoryImage() {
     imgS1.id = 'imageS2';
     divS.className = 'slide';
     divS.id = 'divS2';
-    $(imgS1).attr('src', imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 2 + '.jpg');
+    $(imgS1).attr('src', storyRoot + currentStory + '/' + 2 + '.jpg');
     //$('#pointer_image').attr('src', storyRoot+currentStory+'/pointer.png');
     $('#pointer_image').attr('src', storyRoot_p + '/pointer.gif');
     divS.appendChild(imgS1);
@@ -1286,7 +1286,7 @@ function setStoryImage() {
     imgS1.id = 'imageS3';
     divS.className = 'slide';
     divS.id = 'divS3';
-    $(imgS1).attr('src', imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 3 + '.jpg');
+    $(imgS1).attr('src', storyRoot + currentStory + '/' + 3 + '.jpg');
     $(imgS1).css('visibility ', 'hidden');
     //$('#pointer_image').attr('src', storyRoot+currentStory+'/pointer.png');
     $('#pointer_image').attr('src', storyRoot_p + '/pointer.gif');
@@ -1301,7 +1301,7 @@ function setStoryImage() {
         //alert("loaded");
     }
 
-    $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 3 + '.jpg)');
+    $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + 3 + '.jpg)');
     $('#flipbook').css('background-size', "100% 100%");
     $('#flipbook').pageFlip();
 }
