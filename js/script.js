@@ -1424,9 +1424,8 @@ function storeInPhone(data, category, id) {
 
     storyObject.images = [];
     storyObject.sounds = [];
-
+    count = 11;
     storyCatGlobal = category;
-
     isFinishedImg = false;
     isFinishedSnd = false;
 
@@ -1458,7 +1457,6 @@ function storeInPhone(data, category, id) {
         }
     }
 
-    var count = 11;
     var loadComponents = function () {
         if (count <= 0) {
             alert(isFinishedImg + ' ' + isFinishedSnd);
