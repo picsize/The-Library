@@ -1427,11 +1427,11 @@ function storeInPhone(data, category, id) {
 
     storyCatGlobal = category;
 
-    var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
+    isFinishedImg = false;
+    isFinishedSnd = false;
 
-        var isFinishedImg = false;
-        var isFinishedSnd = false;
-        var done_callback = cb;
+    var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
+       done_callback = cb;
 
         for (var i = 0; i < dataFromServer['sound'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
@@ -1458,7 +1458,7 @@ function storeInPhone(data, category, id) {
         }
     }
 
-    var count = 10;
+    var count = 11;
     var loadComponents = function () {
         if (count <= 0) {
             alert(isFinishedImg + ' ' + isFinishedSnd);
