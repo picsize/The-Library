@@ -6,6 +6,7 @@ var storyObject = {
 }
 var soundRootStorage = '';
 var imageRootStorage = '';
+var storyCatGlobal = '';
 
 var url1_width;
 var url1_height;
@@ -664,8 +665,8 @@ function changeNextPage() {
 
 //Load prev files for story flip
 function changePrevPage() {
-    alert(imageRootStorage + + '/TheLibrary/' + category + '/story' +currentStory + '/' + (storyPage) + '.jpg');
-    $('#flipbook').attr('style', 'background:url(' + imageRootStorage + + '/TheLibrary/' + category + '/story' +currentStory + '/' + (storyPage) + '.jpg)');
+    alert(imageRootStorage + + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg');
+    $('#flipbook').attr('style', 'background:url(' + imageRootStorage + + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)');
 
     //Slide switching as in "ChangeNextPage()" function 
     switch (currentSlidePage) {
@@ -1419,6 +1420,8 @@ function storeInPhone(data, category, id) {
 
     storyObject.images = [];
     storyObject.sounds = [];
+
+    storyCatGlobal = category;
 
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
 
