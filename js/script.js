@@ -161,9 +161,10 @@ document.addEventListener("deviceready", function () {
     function begin() {
         clickFlag = true;
         var path = window.location.pathname;
+        alert(path);
         path = path.substr(path, path.length - 10);
         var pathOfFile = 'file://' + path;
-
+        alert(path);
         //Plays first song
         openMedia = new Media(pathOfFile + 'song.mp3');
         openMedia.play();
