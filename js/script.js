@@ -1249,7 +1249,7 @@ function setStoryImage() {
     $("#flipbook").empty();
     //Empty the flipbook container and create 3 images.
 
-    fm.read_file(imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory, '3.jpg', function (s) { alert(JSON.stringify('s:\n' + s)) }, function (e) { alert('e:\n' + JSON.stringify(e)) });
+    fm.load_file(imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory, '3.jpg', function (s) { alert(JSON.stringify('s:\n' + s)) }, function (e) { alert('e:\n' + JSON.stringify(e)) });
 
     var divS = document.createElement('div');
     var imgS1 = document.createElement('img');
