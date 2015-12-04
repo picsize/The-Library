@@ -1249,6 +1249,8 @@ function setStoryImage() {
     $("#flipbook").empty();
     //Empty the flipbook container and create 3 images.
 
+    fm.read_file(imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory, '3.jpg', function (s) { alert(JSON.stringify('s:\n' + s)) }, function (e) { alert('e:\n' + JSON.stringify(e)) });
+
     var divS = document.createElement('div');
     var imgS1 = document.createElement('img');
 
@@ -1257,7 +1259,7 @@ function setStoryImage() {
     imgS1.id = 'imageS1';
     divS.className = 'slide';
     divS.id = 'divS1';
-    $(imgS1).attr('src', storyRoot + currentStory + '/' + 1 + '.jpg');
+    $(imgS1).attr('src', imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 1 + '.jpg');
     //$('#pointer_image').attr('src', storyRoot+currentStory+'/pointer.png');
     $('#pointer_image').attr('src', storyRoot_p + '/pointer.gif');
     divS.appendChild(imgS1);
@@ -1271,7 +1273,7 @@ function setStoryImage() {
     imgS1.id = 'imageS2';
     divS.className = 'slide';
     divS.id = 'divS2';
-    $(imgS1).attr('src', storyRoot + currentStory + '/' + 2 + '.jpg');
+    $(imgS1).attr('src', imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 2 + '.jpg');
     //$('#pointer_image').attr('src', storyRoot+currentStory+'/pointer.png');
     $('#pointer_image').attr('src', storyRoot_p + '/pointer.gif');
     divS.appendChild(imgS1);
@@ -1286,7 +1288,7 @@ function setStoryImage() {
     imgS1.id = 'imageS3';
     divS.className = 'slide';
     divS.id = 'divS3';
-    $(imgS1).attr('src', storyRoot + currentStory + '/' + 3 + '.jpg');
+    $(imgS1).attr('src', imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 3 + '.jpg');
     $(imgS1).css('visibility ', 'hidden');
     //$('#pointer_image').attr('src', storyRoot+currentStory+'/pointer.png');
     $('#pointer_image').attr('src', storyRoot_p + '/pointer.gif');
@@ -1304,6 +1306,8 @@ function setStoryImage() {
     $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 3 + '.jpg)');
     $('#flipbook').css('background-size', "100% 100%");
     $('#flipbook').pageFlip();
+
+    
 }
 
 
@@ -1424,17 +1428,10 @@ function storeInPhone(data, category, id) {
     storyCatGlobal = category;
 
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
-
+        loadComponents();
         var isFinishedImg = false;
         var isFinishedSnd = false;
         var done_callback = cb;
-
-        $.mobile.loading("show", {
-            text: '...הסיפור כבר מגיע',
-            textVisible: true,
-            theme: "a",
-            html: ''
-        });
 
         for (var i = 0; i < dataFromServer['sound'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
@@ -1460,14 +1457,30 @@ function storeInPhone(data, category, id) {
             });
         }
 
-        checkDownloadStatus = setInterval(function () {
-            if (isFinishedImg && isFinishedSnd) {
-                storyObject.images.sort(sortArray);
-                storyObject.sounds.sort(sortArray);
-                done_callback();
-                clearInterval(checkDownloadStatus);
+        var count = 10;
+        var loadComponents = function () {
+            if (count <= 0) {
+                if (isFinishedImg && isFinishedSnd) {
+                    storyObject.images.sort(sortArray);
+                    storyObject.sounds.sort(sortArray);
+                    done_callback();
+                } else {
+                    count = 10;
+                    setTimeout(loadComponents, 1000);
+                }
             }
-        }, 6000);
+            else {
+                count--;
+                $.mobile.loading("show", {
+                    text: '(' + count + ')...' + 'הסיפור כבר מגיע',
+                    textVisible: true,
+                    theme: "a",
+                    html: ''
+                });
+                setTimeout(loadComponents, 1000);
+            }
+        }
+        
     }
 
 
@@ -1477,7 +1490,6 @@ function storeInPhone(data, category, id) {
     }
 
     downloadStoryFiles(data, category, id, playTheStory);
-
 
 }
 
