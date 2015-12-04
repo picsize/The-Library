@@ -568,14 +568,14 @@ function changeNextPage() {
     if ((storyPage + 1) < storyPageAmount) {
         //Set the background of the flip container, background must be like the current image.
         //When flipping from 3 to 1 the background is the preview to 1 
-        $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + (storyPage + 2) + '.jpg)');
+        $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 2) + '.jpg)');
 
         //Switch between the slides to determine which slide should be change
         switch (currentSlidePage) {
             case 1:
                 $("#divS1").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 2) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 2) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 currentSlidePage++;
@@ -584,7 +584,7 @@ function changeNextPage() {
             case 2:
                 $("#divS2").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 2) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 2) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 currentSlidePage++;
@@ -592,7 +592,7 @@ function changeNextPage() {
             case 3:
                 $("#divS3").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage + 2) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage + 2) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 currentSlidePage = 1;
@@ -601,23 +601,23 @@ function changeNextPage() {
     }
         //The next slide is the last slide
     else {
-        $('#flipbook').attr('style', 'background:url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)');
+        $('#flipbook').attr('style', 'background:url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)');
         //Again switch the slides to determine which one to change. ALL slides are changed to last slide.
         switch (currentSlidePage) {
             case 1:
                 $("#divS1").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 $("#divS2").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 $("#divS3").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 currentSlidePage++;
@@ -626,17 +626,17 @@ function changeNextPage() {
             case 2:
                 $("#divS1").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 $("#divS2").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 $("#divS3").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 currentSlidePage++;
@@ -644,17 +644,17 @@ function changeNextPage() {
             case 3:
                 $("#divS1").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 $("#divS2").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 $("#divS3").find('.img').css(
                 {
-                    'background-image': 'url(' + storyRoot + currentStory + '/' + (storyPage) + '.jpg)',
+                    'background-image': 'url(' + imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + (storyPage) + '.jpg)',
                     'background-size': '100% 0px'
                 });
                 currentSlidePage = 1;
