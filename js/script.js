@@ -1428,7 +1428,7 @@ function storeInPhone(data, category, id) {
     storyCatGlobal = category;
 
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
-        loadComponents();
+        
         var isFinishedImg = false;
         var isFinishedSnd = false;
         var done_callback = cb;
@@ -1472,7 +1472,8 @@ function storeInPhone(data, category, id) {
             else {
                 count--;
                 $.mobile.loading("show", {
-                    text: '(' + count + ')...' + 'הסיפור כבר מגיע',
+                    //text: '(' + count + ')...' + 'הסיפור כבר מגיע',
+                    text:count,
                     textVisible: true,
                     theme: "a",
                     html: ''
@@ -1490,7 +1491,7 @@ function storeInPhone(data, category, id) {
     }
 
     downloadStoryFiles(data, category, id, playTheStory);
-
+    loadComponents();
 }
 
 function sortArray(a, b) {
