@@ -7,6 +7,7 @@ var storyObject = {
 var soundRootStorage = '';
 var imageRootStorage = '';
 var storyCatGlobal = '';
+var appPath = '';
 
 var url1_width;
 var url1_height;
@@ -161,10 +162,9 @@ document.addEventListener("deviceready", function () {
     function begin() {
         clickFlag = true;
         var path = window.location.pathname;
-        alert(path);
         path = path.substr(path, path.length - 10);
         var pathOfFile = 'file://' + path;
-        alert(path);
+        appPath = path;
         //Plays first song
         openMedia = new Media(pathOfFile + 'song.mp3');
         openMedia.play();
@@ -1434,8 +1434,9 @@ function storeInPhone(data, category, id) {
        done_callback = cb;
 
         for (var i = 0; i < dataFromServer['sound'].length; i++) {
-            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
-                imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], appPath + 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
+                alert(res.nativeURL);
+                //imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
                 //alert('snd: ' + imageRootStorage);
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
@@ -1446,9 +1447,10 @@ function storeInPhone(data, category, id) {
         }
 
         for (var i = 0; i < dataFromServer['images'].length; i++) {
-            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
-                soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], appPath +'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
+                //soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
                 //alert('img: ' + soundRootStorage);
+                alert(res.nativeURL);
                 var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
                 storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
                 if (i >= dataFromServer['images'].length) {
