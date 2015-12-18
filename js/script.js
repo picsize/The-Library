@@ -319,7 +319,7 @@ function showLoading() {
     //$("body").append("<img src='loading.gif'  class='quqImg' style='top:40%;left:43%;width:15%;height:20%;' />");
     myTimer();
     $.mobile.loading("show", {
-        text: '(' + count + ')...' + 'הסיפור כבר מגיע',
+        text: '...טוען',
         textVisible: true,
         theme: "a",
         html: ''
@@ -548,7 +548,7 @@ function prevStoryPage() {
         $("#dot").fadeOut('fast');
         clearTimeout(blinkBubble);
         blinkBubble = null;
-        //showLoading();
+        showLoading();
         clickFlag = true;
         popFlag = true;
         clickMedia.play();
@@ -706,7 +706,7 @@ function nextStoryPage() {
         $("#dot").fadeOut('fast');
         clearTimeout(blinkBubble);
         blinkBubble = null;
-        //showLoading();
+        showLoading();
         clickFlag = true;
         popFlag = true;
         clickMedia.play();
