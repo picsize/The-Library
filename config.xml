@@ -43,10 +43,11 @@
 
   <!-- Plugins -->
 
-  <preference name='phonegap-version' value='cli-5.2.0' />
+  <preference name="phonegap-version" value="cli-5.2.0" />
   <gap:plugin name="org.apache.cordova.file" source="pgb" />
   <gap:plugin name="org.apache.cordova.file-transfer" source="pgb"/>
   <gap:plugin name="org.apache.cordova.media" />
+  <gap:plugin name="cordova-plugin-dialogs" source="npm" />
   <gap:plugin name="cordova-plugin-whitelist" source="npm" />
   
 

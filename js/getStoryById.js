@@ -9,9 +9,10 @@ function getStoryById(id, category) {
 	    dataType: 'json',
 	    data: { request: 31, id: id, cat: category },
 	    error: function (XMLHttpRequest, textStatus, errorThrown) {
-	        alert(textStatus);
-	        alert(JSON.stringify(XMLHttpRequest));
-	        alert(JSON.stringify(errorThrown));
+	        var onConfirm = function (buttonIndex) {
+	            alert(JSON.stringify(buttonIndex));
+	        }
+	        navigator.notification.confirm('אין חיבור לאינטרנט. האם ברצונך לצאת מהאפליקציה?', onConfirm, 'הספריה', ['כן', 'לא']);
 	    },
 	    success: function (data) {
 	        //alert('data:\n' + JSON.stringify(data));

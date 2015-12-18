@@ -6,9 +6,10 @@ function getStories(category) {
 	    dataType: 'json',
 	    data: { request: 15, cat: category },
 	    error: function (XMLHttpRequest, textStatus, errorThrown) {
-	        alert(textStatus);
-	        alert(JSON.stringify(XMLHttpRequest));
-	        alert(JSON.stringify(errorThrown));
+	        var onConfirm = function (buttonIndex) {
+	            alert(JSON.stringify(buttonIndex));
+	        }
+	        navigator.notification.confirm('אין חיבור לאינטרנט. האם ברצונך לצאת מהאפליקציה?', onConfirm, 'הספריה', ['כן', 'לא']);
 	    },
 	    success: function (data) {
 	        setFirstStory(data);
