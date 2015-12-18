@@ -9,7 +9,7 @@ function getStoryById(id, category) {
 	    dataType: 'json',
 	    data: { request: 31, id: id, cat: category },
 	    error: function (XMLHttpRequest, textStatus, errorThrown) {
-	        var close = confirm('אין חיבור לאינטרנט. האם ברצונך לצאת מהאפליקציה?');
+	        var close = confirm("אין חיבור לאינטרנט. האם ברצונך לצאת מהאפליקציה?");
 	        if (close) {
 	            navigator.app.exitApp();
 	        }
