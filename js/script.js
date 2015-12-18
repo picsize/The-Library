@@ -1506,22 +1506,5 @@ function sortArray(a, b) {
     return 0;
 }
 
-function checkIfFileExists(path) {
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
-        fileSystem.root.getFile(path, { create: false }, fileExists, fileDoesNotExist);
-    }, getFSFail); //of requestFileSystem
-}
-
-function fileExists(fileEntry) {
-    alert("File " + fileEntry.fullPath + " exists!");
-}
-
-function fileDoesNotExist() {
-    alert("file does not exist");
-}
-
-function getFSFail(evt) {
-    console.log(evt.target.error.code);
-}
 
 
