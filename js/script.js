@@ -316,14 +316,13 @@ function myTimer() {
 
 //Show Loading on screen
 function showLoading() {
-    $("body").append("<img src='loading.gif'  class='quqImg' style='top:40%;left:43%;width:15%;height:20%;' />");
+    //$("body").append("<img src='loading.gif'  class='quqImg' style='top:40%;left:43%;width:15%;height:20%;' />");
     myTimer();
-    $.mobile.loading("show",
-    {
-        text: "",
-        textVisible: false,
-        theme: "z",
-        html: ""
+    $.mobile.loading("show", {
+        text: '(' + count + ')...' + 'הסיפור כבר מגיע',
+        textVisible: true,
+        theme: "a",
+        html: ''
     });
 }
 
@@ -549,7 +548,7 @@ function prevStoryPage() {
         $("#dot").fadeOut('fast');
         clearTimeout(blinkBubble);
         blinkBubble = null;
-        showLoading();
+        //showLoading();
         clickFlag = true;
         popFlag = true;
         clickMedia.play();
@@ -707,7 +706,7 @@ function nextStoryPage() {
         $("#dot").fadeOut('fast');
         clearTimeout(blinkBubble);
         blinkBubble = null;
-        showLoading();
+        //showLoading();
         clickFlag = true;
         popFlag = true;
         clickMedia.play();
@@ -1433,36 +1432,41 @@ function storeInPhone(data, category, id) {
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
        done_callback = cb;
 
-        for (var i = 0; i < dataFromServer['sound'].length; i++) {
-            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
-                //alert(res.nativeURL);
-                imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
-                //alert('snd: ' + imageRootStorage);
-                var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-                storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
-                if (i >= dataFromServer['sound'].length) {
-                    isFinishedSnd = true;
-                }
-            });
+       for (var i = 0; i < dataFromServer['sound'].length; i++) {
+           var url = mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i];
+           var path = 'TheLibrary/' + storyCat + '/story' + storyId;
+           var fileName = dataFromServer['sound'][i];
+           //var notFound = function () {
+           //    fm.download_file(url, path, fileName, function (res) {
+           //        soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+           //        var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+           //        storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
+           //        if (i >= dataFromServer['sound'].length) {
+           //            isFinishedSnd = true;
+           //        }
+           //    });
+           //}
+
+           //fm.read_file(path, fileName, null, notFound);
+           alert(path + '/' + fileName);
+           checkIfFileExists(path + '/' + fileName);
         }
 
         for (var i = 0; i < dataFromServer['images'].length; i++) {
-            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
-                soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
-                //alert('img: ' + soundRootStorage);
-                //alert(res.nativeURL);
-                var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-                storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
-                if (i >= dataFromServer['images'].length) {
-                    isFinishedImg = true;
-                }
-            });
+            //fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
+            //    imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            //    var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+            //    storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
+            //    if (i >= dataFromServer['images'].length) {
+            //        isFinishedImg = true;
+            //    }
+            //});
         }
     }
 
     var loadComponents = function () {
         if (count <= 0) {
-            alert(isFinishedImg + ' ' + isFinishedSnd);
+            //alert(isFinishedImg + ' ' + isFinishedSnd);
             if (isFinishedImg && isFinishedSnd) {
                 storyObject.images.sort(sortArray);
                 storyObject.sounds.sort(sortArray);
@@ -1502,5 +1506,22 @@ function sortArray(a, b) {
     return 0;
 }
 
+function checkIfFileExists(path) {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
+        fileSystem.root.getFile(path, { create: false }, fileExists, fileDoesNotExist);
+    }, getFSFail); //of requestFileSystem
+}
+
+function fileExists(fileEntry) {
+    alert("File " + fileEntry.fullPath + " exists!");
+}
+
+function fileDoesNotExist() {
+    alert("file does not exist");
+}
+
+function getFSFail(evt) {
+    console.log(evt.target.error.code);
+}
 
 
