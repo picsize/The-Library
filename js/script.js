@@ -329,7 +329,7 @@ function showLoading() {
 //Hide loading
 function hideLoading() {
     clearTimeout(myVar2);
-    $(".quqImg").remove();
+    //$(".quqImg").remove();
     $.mobile.loading("hide");
 }
 
@@ -1249,7 +1249,7 @@ function setStoryImage() {
     $("#flipbook").empty();
     //Empty the flipbook container and create 3 images.
 
-    fm.load_file(imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory, '3.jpg', function (s) { alert(JSON.stringify('s:\n' + s)) }, function (e) { alert('e:\n' + JSON.stringify(e)) });
+    //fm.load_file(imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory, '3.jpg', function (s) { alert(JSON.stringify('s:\n' + s)) }, function (e) { alert('e:\n' + JSON.stringify(e)) });
 
     var divS = document.createElement('div');
     var imgS1 = document.createElement('img');
@@ -1436,20 +1436,21 @@ function storeInPhone(data, category, id) {
            var url = mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i];
            var path = 'TheLibrary/' + storyCat + '/story' + storyId;
            var fileName = dataFromServer['sound'][i];
-           //var notFound = function () {
-           //    fm.download_file(url, path, fileName, function (res) {
-           //        soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
-           //        var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-           //        storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
-           //        if (i >= dataFromServer['sound'].length) {
-           //            isFinishedSnd = true;
-           //        }
-           //    });
-           //}
-
-           //fm.read_file(path, fileName, null, notFound);
+           var notFound = function (e) {
+               alert('e: ' + JSON.stringify(e));
+               fm.download_file(url, path, fileName, function (res) {
+                   soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+                   var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+                   storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
+                   if (i >= dataFromServer['sound'].length) {
+                       isFinishedSnd = true;
+                   }
+               });
+           }
+           
+           fm.read_file(path, fileName, null, notFound);
            alert(path + '/' + fileName);
-           checkIfFileExists(path + '/' + fileName);
+           //checkIfFileExists(path + '/' + fileName);
         }
 
         for (var i = 0; i < dataFromServer['images'].length; i++) {
