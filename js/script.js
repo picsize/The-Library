@@ -1260,6 +1260,7 @@ function setStoryImage() {
     divS.className = 'slide';
     divS.id = 'divS1';
     $(imgS1).attr('src', imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 1 + '.jpg');
+    alert($(imgS1).attr('src'));
     //$('#pointer_image').attr('src', storyRoot+currentStory+'/pointer.png');
     $('#pointer_image').attr('src', storyRoot_p + '/pointer.gif');
     divS.appendChild(imgS1);
@@ -1497,6 +1498,7 @@ function sortArray(a, b) {
     return 0;
 }
 
+//get stories by category
 function getStories(category) {
     $.ajax(
 	{
@@ -1516,6 +1518,7 @@ function getStories(category) {
 	});
 }
 
+//get story details by id
 function getStoryById(id, category) {
     var dm = new DirManager(); // Initialize a Folder manager
     dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
