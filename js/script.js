@@ -1260,7 +1260,6 @@ function setStoryImage() {
     divS.className = 'slide';
     divS.id = 'divS1';
     $(imgS1).attr('src', imageRootStorage + '/TheLibrary/' + storyCatGlobal + '/story' + currentStory + '/' + 1 + '.jpg');
-    alert($(imgS1).attr('src'));
     //$('#pointer_image').attr('src', storyRoot+currentStory+'/pointer.png');
     $('#pointer_image').attr('src', storyRoot_p + '/pointer.gif');
     divS.appendChild(imgS1);
@@ -1458,7 +1457,7 @@ function storeInPhone(data, category, id) {
 
     var loadComponents = function () {
         if (count <= 0) {
-            //alert(isFinishedImg + ' ' + isFinishedSnd);
+            alert(isFinishedImg + ' ' + isFinishedSnd);
             if (isFinishedImg && isFinishedSnd) {
                 storyObject.images.sort(sortArray);
                 storyObject.sounds.sort(sortArray);
