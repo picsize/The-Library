@@ -139,6 +139,8 @@ function onPause() {
 //On Device ready function
 document.addEventListener("deviceready", function () {
 
+    alert('גרסה מעודכנת');
+
     //create the main dir
     var dm = new DirManager(); // Initialize a Folder manager
     dm.create_r('TheLibrary', Log('created successfully'));
@@ -1457,7 +1459,7 @@ function storeInPhone(data, category, id) {
 
     var loadComponents = function () {
         if (count <= 0) {
-            alert(isFinishedImg + ' ' + isFinishedSnd);
+            //alert(isFinishedImg + ' ' + isFinishedSnd);
             if (isFinishedImg && isFinishedSnd) {
                 storyObject.images.sort(sortArray);
                 storyObject.sounds.sort(sortArray);
@@ -1536,7 +1538,6 @@ function getStoryById(id, category) {
 	    },
 	    success: function (data) {
 	        //alert('data:\n' + JSON.stringify(data));
-
 	        storeInPhone(data, category, id);
 
 	    }
