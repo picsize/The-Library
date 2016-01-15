@@ -1428,9 +1428,14 @@ function storeInPhone(data, category, id) {
 
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
-        download_10(storyId, storyCat);
+        
         dfd = $.Deferred();
-        dfd.done(download_10).done(done_callback);
+        dfd.done(function () {
+            download_10(storyId, storyCat);
+        }).done(done_callback).done(function () {
+            downloadRest(storyId, storyCat, dataFromServer['sound'], dataFromServer['images']);
+
+        });
         //for (var i = 0; i < dataFromServer['sound'].length; i++) {
         //    fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
         //        soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
@@ -1455,32 +1460,34 @@ function storeInPhone(data, category, id) {
     }
 
     var loadComponents = function () {
-        if (count <= 0) {
-            storyObject.images.sort(sortArray);
-            storyObject.sounds.sort(sortArray);
-            done_callback();
 
-            //if (isFinishedImg && isFinishedSnd) {
+        storyObject.images.sort(sortArray);
+        storyObject.sounds.sort(sortArray);
+        done_callback();
+
+        //if (count <= 0) {
+            
+
+        //    //if (isFinishedImg && isFinishedSnd) {
                 
-            //} else {
-            //    count = 6;
-            //    setTimeout(loadComponents, 1000);
-            //}
-        }
-        else {
-            count--;
-            $.mobile.loading("show", {
-                text: '(' + count + ')...' + 'הסיפור כבר מגיע',
-                textVisible: true,
-                theme: "a",
-                html: ''
-            });
-            setTimeout(loadComponents, 1000);
-        }
+        //    //} else {
+        //    //    count = 6;
+        //    //    setTimeout(loadComponents, 1000);
+        //    //}
+        //}
+        //else {
+        //    count--;
+        //    $.mobile.loading("show", {
+        //        text: '(' + count + ')...' + 'הסיפור כבר מגיע',
+        //        textVisible: true,
+        //        theme: "a",
+        //        html: ''
+        //    });
+        //    setTimeout(loadComponents, 1000);
+        //}
     }
 
     var playTheStory = function () {
-        alert('play the story');
         storyData = data;
         setStory(data);
     }
@@ -1545,7 +1552,6 @@ function getStoryById(id, category) {
 }
 
 function download_10(storyId, storyCat) {
-    alert('download_10');
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
@@ -1611,6 +1617,26 @@ function download_40(storyId, storyCat) {
             });
         });
     } //end for
+}
+
+function downloadRest(storyId, storyCat, sounds, images) {
+    for (var i = 10; i < sounds.length ; i++) {
+        var page = i + 1;
+        fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
+            soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+            storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
+        });
+    } //end for sounds
+
+    for (var i = 10; i < images.length; i++) {
+        var page = i + 1;
+        fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
+            imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+            storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
+        });
+    } //end for images
 }
 
 
