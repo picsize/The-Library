@@ -89,7 +89,11 @@ var imgS2 = document.createElement('img');
 document.addEventListener("backbutton", onBackKeyDown, false);
 function onBackKeyDown(e) {
     e.preventDefault();
-    clearTimeout();
+    alert('click on back');
+    var id = window.setTimeout(function () { }, 0);
+    while (id--) {
+        window.clearTimeout(id); // will do nothing if no timeout with id is present
+    }
     switch (stage) {
         case 1:
             var result = confirm("האם אתה בטוח שברצונך לצאת?");
