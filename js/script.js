@@ -1421,19 +1421,13 @@ function storeInPhone(data, category, id) {
 
     storyObject.images = new Array();
     storyObject.sounds = new Array();
-    count = 6;
     storyCatGlobal = category;
     isFinishedImg = false;
     isFinishedSnd = false;
 
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
-        download_10(storyId, storyCat);
-        dfd = $.Deferred();
-        dfd.done(download_10).done(done_callback).done(function () {
-            downloadRest(storyId, storyCat, dataFromServer['sound'], dataFromServer['images']);
-
-        });
+        download_10(storyId, storyCat, done_callback);
         //for (var i = 0; i < dataFromServer['sound'].length; i++) {
         //    fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
         //        soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
@@ -1457,11 +1451,20 @@ function storeInPhone(data, category, id) {
         //}
     }
 
-    var loadComponents = function () {
+    var loadComponents = function (storyId, storyCat, sounds, images) {
 
-        storyObject.images.sort(sortArray);
-        storyObject.sounds.sort(sortArray);
-        done_callback();
+        var interval = setInterval(function () {
+            if (localStorage.getItem('download_10') == 'true') {
+                clearInterval(interval);
+                downloadRest(storyId, storyCat, sounds, images);
+            }
+        }, 1000);
+
+
+        //storyObject.images.sort(sortArray);
+        //storyObject.sounds.sort(sortArray);
+        //done_callback();
+        
 
         //if (count <= 0) {
             
@@ -1487,12 +1490,13 @@ function storeInPhone(data, category, id) {
 
     var playTheStory = function () {
         alert('play');
+        localStorage.setItem('download_10', true);
         storyData = data;
         setStory(data);
     }
 
     downloadStoryFiles(data, category, id, playTheStory);
-    //loadComponents();
+    loadComponents(id,category,data['sound'],data['images']);
 
 }
 
@@ -1550,7 +1554,7 @@ function getStoryById(id, category) {
 	});
 }
 
-function download_10(storyId, storyCat) {
+function download_10(storyId, storyCat, cb) {
     alert('10');
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
@@ -1569,6 +1573,8 @@ function download_10(storyId, storyCat) {
             storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
         });
     } //end for images
+
+    cb();
 }
 
 function download_20(storyId, storyCat) {
