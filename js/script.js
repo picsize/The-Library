@@ -1424,7 +1424,7 @@ function storeInPhone(data, category, id) {
     count = 6;
     isFinishedImg = false;
     isFinishedSnd = false;
-
+    $('.back_to').hide();
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
         download_10(storyId, storyCat);
@@ -1447,11 +1447,11 @@ function storeInPhone(data, category, id) {
     }
 
     var playTheStory = function () {
-        alert('play');
+        //alert('play');
         //localStorage.setItem('download_10', true);
-        
+        $('.back_to').show();
         storyData = data;
-        alert(storyData['totalSounds']);
+        //alert(storyData['totalSounds']);
         downloadRest(id, category, storyData['totalSounds'], storyData['totalImages']);
         setStory(data);
     }
@@ -1516,7 +1516,7 @@ function getStoryById(id, category) {
 }
 
 function download_10(storyId, storyCat) {
-    alert('10');
+    //alert('10');
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
@@ -1539,8 +1539,8 @@ function download_10(storyId, storyCat) {
 }
 
 function downloadRest(storyId, storyCat, sounds, images) {
-    alert('rest');
-    alert(sounds + ' ' + images);
+    //alert('rest');
+    //alert(sounds + ' ' + images);
     for (var i = 10; i < sounds; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
