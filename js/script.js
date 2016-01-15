@@ -1451,8 +1451,8 @@ function storeInPhone(data, category, id) {
         //localStorage.setItem('download_10', true);
         
         storyData = data;
-        alert(JSON.stringify(storyData['sound']));
-        downloadRest(id, category, data['sound'], data['images']);
+        alert(JSON.stringify(storyData['sound'].length));
+        downloadRest(id, category, storyData['sound'].length, storyData['images'].length);
         setStory(data);
     }
 
@@ -1540,8 +1540,8 @@ function download_10(storyId, storyCat) {
 
 function downloadRest(storyId, storyCat, sounds, images) {
     alert('rest');
-    alert(sounds.length + ' ' + images.length);
-    for (var i = 10; i < sounds.length; i++) {
+    alert(sounds + ' ' + images);
+    for (var i = 10; i < sounds; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
             soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
@@ -1550,7 +1550,7 @@ function downloadRest(storyId, storyCat, sounds, images) {
         });
     } //end for sounds
 
-    for (var i = 10; i < images.length; i++) {
+    for (var i = 10; i < images; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
             imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
