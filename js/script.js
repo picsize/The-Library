@@ -1451,8 +1451,8 @@ function storeInPhone(data, category, id) {
         //localStorage.setItem('download_10', true);
         
         storyData = data;
-        alert(JSON.stringify(storyData['sound'].length));
-        downloadRest(id, category, storyData['sound'].length, storyData['images'].length);
+        alert(storyData['totalSounds']);
+        downloadRest(id, category, storyData['totalSounds'], storyData['totalImages']);
         setStory(data);
     }
 
@@ -1507,7 +1507,7 @@ function getStoryById(id, category) {
 	        }
 	    },
 	    success: function (data) {
-	        alert('data:\n' + JSON.stringify(data));
+	        //alert('data:\n' + JSON.stringify(data));
 	        localStorage.setItem('lastPageLoaded', 0);
 	        storeInPhone(data, category, id);
 
