@@ -1456,14 +1456,16 @@ function storeInPhone(data, category, id) {
 
     var loadComponents = function () {
         if (count <= 0) {
-            if (isFinishedImg && isFinishedSnd) {
-                storyObject.images.sort(sortArray);
-                storyObject.sounds.sort(sortArray);
-                done_callback();
-            } else {
-                count = 6;
-                setTimeout(loadComponents, 1000);
-            }
+            storyObject.images.sort(sortArray);
+            storyObject.sounds.sort(sortArray);
+            done_callback();
+
+            //if (isFinishedImg && isFinishedSnd) {
+                
+            //} else {
+            //    count = 6;
+            //    setTimeout(loadComponents, 1000);
+            //}
         }
         else {
             count--;
