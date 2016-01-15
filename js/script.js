@@ -1428,28 +1428,30 @@ function storeInPhone(data, category, id) {
 
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
-        
-        for (var i = 0; i < dataFromServer['sound'].length; i++) {
-            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
-                soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
-                var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-                storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
-                if (i >= dataFromServer['sound'].length) {
-                    isFinishedSnd = true;
-                }
-            });
-        }
+        download_10(storyId, storyCat);
+        dfd = $.Deferred();
+        dfd.done(download_10).done(done_callback);
+        //for (var i = 0; i < dataFromServer['sound'].length; i++) {
+        //    fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
+        //        soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+        //        var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+        //        storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
+        //        if (i >= dataFromServer['sound'].length) {
+        //            isFinishedSnd = true;
+        //        }
+        //    });
+        //}
 
-        for (var i = 0; i < dataFromServer['images'].length; i++) {
-            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
-                imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
-                var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-                storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
-                if (i >= dataFromServer['images'].length) {
-                    isFinishedImg = true;
-                }
-            });
-        }
+        //for (var i = 0; i < dataFromServer['images'].length; i++) {
+        //    fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
+        //        imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+        //        var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+        //        storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
+        //        if (i >= dataFromServer['images'].length) {
+        //            isFinishedImg = true;
+        //        }
+        //    });
+        //}
     }
 
     var loadComponents = function () {
@@ -1476,6 +1478,7 @@ function storeInPhone(data, category, id) {
     }
 
     var playTheStory = function () {
+        alert('play the story');
         storyData = data;
         setStory(data);
     }
@@ -1531,12 +1534,77 @@ function getStoryById(id, category) {
 	        }
 	    },
 	    success: function (data) {
-	        alert('data:\n' + JSON.stringify(data));
+	        //alert('data:\n' + JSON.stringify(data));
+	        localStorage.setItem('lastPageLoaded', 0);
 	        storeInPhone(data, category, id);
 
 	    }
 	});
 }
 
+function download_10(storyId, storyCat) {
+    alert('download_10');
+    for (var i = 0; i < 10 ; i++) {
+        var page = i + 1;
+        fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
+            soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+            storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
+            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
+                imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+                var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+                storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
+            });
+        });
+    } //end for
+}
+
+function download_20(storyId, storyCat) {
+    for (var i = 10; i < 20 ; i++) {
+        var page = i + 1;
+        fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
+            soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+            storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
+            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
+                imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+                var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+                storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
+            });
+        });
+    } //end for
+}
+
+function download_30(storyId, storyCat) {
+    for (var i = 20; i < 30 ; i++) {
+        var page = i + 1;
+        fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
+            soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+            storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
+            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
+                imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+                var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+                storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
+            });
+        });
+    } //end for
+}
+
+function download_40(storyId, storyCat) {
+    for (var i = 30; i < 40 ; i++) {
+        var page = i + 1;
+        fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
+            soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+            storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
+            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
+                imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+                var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+                storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
+            });
+        });
+    } //end for
+}
 
 
