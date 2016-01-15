@@ -1552,13 +1552,17 @@ function download_10(storyId, storyCat) {
             soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
-            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
-                imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
-                var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-                storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
-            });
         });
-    } //end for
+    } //end for sounds
+
+    for (var i = 0; i < 10; i++) {
+        var page = i + 1;
+        fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
+            imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+            storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
+        });
+    } //end for images
 }
 
 function download_20(storyId, storyCat) {
