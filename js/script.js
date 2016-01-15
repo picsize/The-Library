@@ -1454,7 +1454,7 @@ function storeInPhone(data, category, id) {
 
     var loadComponents = function () {
         if (count <= 0) {
-            //alert(isFinishedImg + ' ' + isFinishedSnd);
+            alert(isFinishedImg + ' ' + isFinishedSnd);
             if (isFinishedImg && isFinishedSnd) {
                 storyObject.images.sort(sortArray);
                 storyObject.sounds.sort(sortArray);
@@ -1477,8 +1477,8 @@ function storeInPhone(data, category, id) {
     }
 
     var playTheStory = function () {
-        alert('images:\n' + storyObject.images.join());
-        alert('images:\n' + storyObject.sounds.join());
+        alert('images:\n' + JSON.stringify(storyObject.images));
+        alert('sounds:\n' + JSON.stringify(storyObject.sounds));
         storyData = data;
         setStory(data);
     }
