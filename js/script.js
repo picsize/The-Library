@@ -1421,7 +1421,7 @@ function storeInPhone(data, category, id) {
 
     storyObject.images = new Array();
     storyObject.sounds = new Array();
-    count = 11;
+    count = 15;
     storyCatGlobal = category;
     isFinishedImg = false;
     isFinishedSnd = false;
@@ -1460,7 +1460,7 @@ function storeInPhone(data, category, id) {
                 storyObject.sounds.sort(sortArray);
                 done_callback();
             } else {
-                count = 10;
+                count = 15;
                 setTimeout(loadComponents, 1000);
             }
         }
