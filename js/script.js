@@ -1507,7 +1507,7 @@ function getStoryById(id, category) {
 	        }
 	    },
 	    success: function (data) {
-	        //alert('data:\n' + JSON.stringify(data));
+	        alert('data:\n' + JSON.stringify(data));
 	        localStorage.setItem('lastPageLoaded', 0);
 	        storeInPhone(data, category, id);
 
