@@ -1307,7 +1307,7 @@ function setStoryImage() {
     $('#flipbook').css('background-size', "100% 100%");
     $('#flipbook').pageFlip();
 
-    
+
 }
 
 //Move the dor by the coords of the current story
@@ -1427,34 +1427,36 @@ function storeInPhone(data, category, id) {
     isFinishedSnd = false;
 
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
-       done_callback = cb;
+        done_callback = cb;
+        alert('downloadStoryFiles -> next data from the server');
+        alert('sounds', JSON.stringify(dataFromServer['sound']));
+        alert('images', JSON.stringify(dataFromServer['images']));
 
-       for (var i = 0; i < dataFromServer['sound'].length; i++) {
-           fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
-               soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
-               var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-               storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
-               if (i >= dataFromServer['sound'].length) {
-                   isFinishedSnd = true;
-               }
-           });
+        for (var i = 0; i < dataFromServer['sound'].length; i++) {
+            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
+                soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+                var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+                storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
+                if (i >= dataFromServer['sound'].length) {
+                    isFinishedSnd = true;
+                }
+            });
         }
 
-       for (var i = 0; i < dataFromServer['images'].length; i++) {
-           fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
-               imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
-               var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
-               storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
-               if (i >= dataFromServer['images'].length) {
-                   isFinishedImg = true;
-               }
-           });            
+        for (var i = 0; i < dataFromServer['images'].length; i++) {
+            fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['images'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['images'][i], function (res) {
+                imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+                var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
+                storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
+                if (i >= dataFromServer['images'].length) {
+                    isFinishedImg = true;
+                }
+            });
         }
     }
 
     var loadComponents = function () {
         if (count <= 0) {
-            alert(isFinishedImg + ' ' + isFinishedSnd);
             if (isFinishedImg && isFinishedSnd) {
                 storyObject.images.sort(sortArray);
                 storyObject.sounds.sort(sortArray);
@@ -1477,8 +1479,6 @@ function storeInPhone(data, category, id) {
     }
 
     var playTheStory = function () {
-        alert('images:\n' + JSON.stringify(storyObject.images));
-        alert('sounds:\n' + JSON.stringify(storyObject.sounds));
         storyData = data;
         setStory(data);
     }
