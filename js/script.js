@@ -89,6 +89,7 @@ var imgS2 = document.createElement('img');
 document.addEventListener("backbutton", onBackKeyDown, false);
 function onBackKeyDown(e) {
     e.preventDefault();
+    clearTimeout();
     switch (stage) {
         case 1:
             var result = confirm("האם אתה בטוח שברצונך לצאת?");
@@ -1433,6 +1434,7 @@ function storeInPhone(data, category, id) {
     var loadComponents = function () {
         if (count <= 0) {
             done_callback();
+            $('.back_to').show();
         }
         else {
             count--;
@@ -1449,7 +1451,6 @@ function storeInPhone(data, category, id) {
     var playTheStory = function () {
         //alert('play');
         //localStorage.setItem('download_10', true);
-        $('.back_to').show();
         storyData = data;
         //alert(storyData['totalSounds']);
         downloadRest(id, category, storyData['totalSounds'], storyData['totalImages']);
