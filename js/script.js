@@ -1421,17 +1421,14 @@ function storeInPhone(data, category, id) {
 
     storyObject.images = new Array();
     storyObject.sounds = new Array();
-    count = 15;
+    count = 6;
     storyCatGlobal = category;
     isFinishedImg = false;
     isFinishedSnd = false;
 
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
-        alert('downloadStoryFiles -> next data from the server');
-        alert('sounds', JSON.stringify(dataFromServer['sound']));
-        alert('images', JSON.stringify(dataFromServer['images']));
-
+        
         for (var i = 0; i < dataFromServer['sound'].length; i++) {
             fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + dataFromServer['sound'][i], 'TheLibrary/' + storyCat + '/story' + storyId, dataFromServer['sound'][i], function (res) {
                 soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
@@ -1462,7 +1459,7 @@ function storeInPhone(data, category, id) {
                 storyObject.sounds.sort(sortArray);
                 done_callback();
             } else {
-                count = 15;
+                count = 6;
                 setTimeout(loadComponents, 1000);
             }
         }
