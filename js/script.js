@@ -89,11 +89,7 @@ var imgS2 = document.createElement('img');
 document.addEventListener("backbutton", onBackKeyDown, false);
 function onBackKeyDown(e) {
     e.preventDefault();
-    alert('click on back');
-    var id = window.setTimeout(function () { }, 0);
-    while (id--) {
-        window.clearTimeout(id); // will do nothing if no timeout with id is present
-    }
+    clearTimeuots();
     switch (stage) {
         case 1:
             var result = confirm("האם אתה בטוח שברצונך לצאת?");
@@ -140,6 +136,12 @@ function onPause() {
     }
 }
 
+function clearTimeuots() {
+    var id = window.setTimeout(function () { }, 0);
+    while (id--) {
+        window.clearTimeout(id); // will do nothing if no timeout with id is present
+    }
+}
 
 //On Device ready function
 document.addEventListener("deviceready", function () {
@@ -347,6 +349,7 @@ function getPhoneGapPath() {
 
 //Go from catgeory page to main page
 function gotoFirstPage() {
+    clearTimeuots();
     stage = 1;
     var di = document.getElementById('di');
     di.scrollLeft = 0;
@@ -1429,7 +1432,6 @@ function storeInPhone(data, category, id) {
     count = 6;
     isFinishedImg = false;
     isFinishedSnd = false;
-    $('.back_to').hide();
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
         download_10(storyId, storyCat);
@@ -1438,7 +1440,6 @@ function storeInPhone(data, category, id) {
     var loadComponents = function () {
         if (count <= 0) {
             done_callback();
-            $('.back_to').show();
         }
         else {
             count--;
