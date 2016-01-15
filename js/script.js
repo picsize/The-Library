@@ -1418,7 +1418,6 @@ function gotoStoryList() {
 }
 
 function storeInPhone(data, category, id) {
-
     storyObject.images = new Array();
     storyObject.sounds = new Array();
     storyCatGlobal = category;
@@ -1450,9 +1449,10 @@ function storeInPhone(data, category, id) {
     var playTheStory = function () {
         alert('play');
         //localStorage.setItem('download_10', true);
-        alert('in Play: ' + data['sound'].length + ' ' + data['images'].length);
-        downloadRest(id, category, data['sound'], data['images']);
+        
         storyData = data;
+        alert(JSON.stringify(storyData['sound']));
+        downloadRest(id, category, data['sound'], data['images']);
         setStory(data);
     }
 
