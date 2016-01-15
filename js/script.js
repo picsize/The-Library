@@ -139,8 +139,6 @@ function onPause() {
 //On Device ready function
 document.addEventListener("deviceready", function () {
 
-    alert('גרסה מעודכנת');
-
     //create the main dir
     var dm = new DirManager(); // Initialize a Folder manager
     dm.create_r('TheLibrary', Log('created successfully'));
@@ -1312,7 +1310,6 @@ function setStoryImage() {
     
 }
 
-
 //Move the dor by the coords of the current story
 function moveDot(x, y) {
     all_time = 0;
@@ -1350,8 +1347,6 @@ function moveDot(x, y) {
         $("#dot").fadeOut('fast');
     }
 }
-
-
 
 //Go out from the story to the story list (of current category)
 function gotoStoryList() {
@@ -1424,8 +1419,8 @@ function gotoStoryList() {
 
 function storeInPhone(data, category, id) {
 
-    storyObject.images = [];
-    storyObject.sounds = [];
+    storyObject.images = new Array();
+    storyObject.sounds = new Array();
     count = 11;
     storyCatGlobal = category;
     isFinishedImg = false;
@@ -1482,6 +1477,8 @@ function storeInPhone(data, category, id) {
     }
 
     var playTheStory = function () {
+        alert('images:\n' + storyObject.images.join());
+        alert('images:\n' + storyObject.sounds.join());
         storyData = data;
         setStory(data);
     }
