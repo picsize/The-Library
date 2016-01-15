@@ -1422,6 +1422,7 @@ function storeInPhone(data, category, id) {
     storyObject.images = new Array();
     storyObject.sounds = new Array();
     storyCatGlobal = category;
+    count = 6;
     isFinishedImg = false;
     isFinishedSnd = false;
     dfd = $.Deferred();
@@ -1429,44 +1430,23 @@ function storeInPhone(data, category, id) {
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
         download_10(storyId, storyCat);
-        dfd.done(download_10).done(function () { alert('bbb'); done_callback(); });
+        dfd.done(download_10).done(done_callback);
     }
 
     var loadComponents = function (storyId, storyCat, sounds, images) {
-
-        //var interval = setInterval(function () {
-        //    if (localStorage.getItem('download_10') == 'true') {
-        //        clearInterval(interval);
-
-        //    }
-        //}, 1000);
-
-
-        //storyObject.images.sort(sortArray);
-        //storyObject.sounds.sort(sortArray);
-        //done_callback();
-
-
-        //if (count <= 0) {
-
-
-        //    //if (isFinishedImg && isFinishedSnd) {
-
-        //    //} else {
-        //    //    count = 6;
-        //    //    setTimeout(loadComponents, 1000);
-        //    //}
-        //}
-        //else {
-        //    count--;
-        //    $.mobile.loading("show", {
-        //        text: '(' + count + ')...' + 'הסיפור כבר מגיע',
-        //        textVisible: true,
-        //        theme: "a",
-        //        html: ''
-        //    });
-        //    setTimeout(loadComponents, 1000);
-        //}
+        if (count <= 0) {
+            done_callback();
+        }
+        else {
+            count--;
+            $.mobile.loading("show", {
+                text: '(' + count + ')...' + 'הסיפור כבר מגיע',
+                textVisible: true,
+                theme: "a",
+                html: ''
+            });
+            setTimeout(loadComponents, 1000);
+        }
     }
 
     var playTheStory = function () {
@@ -1478,7 +1458,7 @@ function storeInPhone(data, category, id) {
     }
 
     downloadStoryFiles(data, category, id, playTheStory);
-    //loadComponents(id,category,data['sound'],data['images']);
+    loadComponents(id,category,data['sound'],data['images']);
 
 }
 
@@ -1556,11 +1536,12 @@ function download_10(storyId, storyCat) {
         });
     } //end for images
 
-    dfd.resolve();
+    //dfd.resolve();
 }
 
 function downloadRest(storyId, storyCat, sounds, images) {
     alert('rest');
+    alert(storyId + storyCat +  sounds +  images);
     for (var i = 10; i < sounds.length ; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
