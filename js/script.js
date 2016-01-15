@@ -1428,9 +1428,9 @@ function storeInPhone(data, category, id) {
 
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
-        //download_10(storyId, storyCat);
+        download_10(storyId, storyCat);
         dfd = $.Deferred();
-        dfd.done(function () { download_10(storyId, storyCat); }).done(done_callback).done(function () {
+        dfd.done(download_10).done(done_callback).done(function () {
             downloadRest(storyId, storyCat, dataFromServer['sound'], dataFromServer['images']);
 
         });
