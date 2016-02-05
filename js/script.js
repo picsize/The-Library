@@ -1509,7 +1509,7 @@ function getStories(category) {
 	            navigator.app.exitApp();
 	        } else {
 	            xhr.abort();
-	            $.mobile.changePage('#first_page');
+	            gotoFirstPage();
 	        }
 	    },
 	    success: function (data) {
@@ -1532,7 +1532,7 @@ function getStoryById(id, category) {
                  navigator.app.exitApp();
              } else {
                  xhr.abort();
-                 $.mobile.changePage('#first_page');
+                 gotoFirstPage();
              }
          },
          success: function (data) {
@@ -1562,7 +1562,8 @@ function download_10(storyId, storyCat) {
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/story', page + '.mp3', function (res) {
-            //soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            alert(soundRootStorage)
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
         });
@@ -1571,7 +1572,7 @@ function download_10(storyId, storyCat) {
     for (var i = 0; i < 10; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/story', page + '.jpg', function (res) {
-            //imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
         });
@@ -1589,7 +1590,7 @@ function downloadRest(storyId, storyCat, sounds, images) {
     for (var i = 0; i < sounds; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/story', page + '.mp3', function (res) {
-            //soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
         });
@@ -1598,7 +1599,7 @@ function downloadRest(storyId, storyCat, sounds, images) {
     for (var i = 10; i < images; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/story', page + '.jpg', function (res) {
-            //imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
+            imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
         });
