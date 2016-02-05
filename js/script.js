@@ -1445,6 +1445,7 @@ function gotoStoryList() {
 
 function storeInPhone(data, category, id) {
     $.mobile.loading('hide');
+    alert('store in phone');
     storyObject.images = new Array();
     storyObject.sounds = new Array();
     storyCatGlobal = category;
@@ -1453,6 +1454,7 @@ function storeInPhone(data, category, id) {
     isFinishedSnd = false;
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
+        alert('before');
         download_10(storyId, storyCat);
     }
 
@@ -1476,7 +1478,7 @@ function storeInPhone(data, category, id) {
     }
 
     var playTheStory = function () {
-        //alert('play');
+        alert('play');
         //localStorage.setItem('download_10', true);
         storyData = data;
         //alert(storyData['totalSounds']);
@@ -1541,19 +1543,23 @@ function getStoryById(id, category) {
              //alert('data:\n' + JSON.stringify(data));
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
-             //alert('thisStory: '+ thisStory);
-             if (thisLocalStory != thisStory) {
-                 localStorage.setItem('thisLocalStory', thisStory);
-                 //dm.remove('TheLibrary/' + thisLocalStory.split('_')[0], function () {
-                     
-                 //}, function () { alert('התיקייה לא נמחקה'); });
+             alert('success');
+             dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
+             storeInPhone(data, category, id);
 
-                 dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
-                 storeInPhone(data, category, id);
+             //alert('thisStory: '+ thisStory);
+             //if (thisLocalStory != thisStory) {
+             //    localStorage.setItem('thisLocalStory', thisStory);
+             //    //dm.remove('TheLibrary/' + thisLocalStory.split('_')[0], function () {
+                     
+             //    //}, function () { alert('התיקייה לא נמחקה'); });
+
+             //    dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
+             //    storeInPhone(data, category, id);
                  
-             } else {
-                 setStory(data);
-             }
+             //} else {
+             //    setStory(data);
+             //}
              
 
          }
@@ -1561,13 +1567,13 @@ function getStoryById(id, category) {
 }
 
 function download_10(storyId, storyCat) {
-    //alert('10');
+    alert('10');
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
             soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
             alert('sound: '+ res);
-            localStorage.setItem('soundRootStorage', res.nativeURL.split('/TheLibrary')[0]);
+            //localStorage.setItem('soundRootStorage', res.nativeURL.split('/TheLibrary')[0]);
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
         });
@@ -1578,7 +1584,7 @@ function download_10(storyId, storyCat) {
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
             imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
             alert('image: ' + res);
-            localStorage.setItem('imageRootStorage', res.nativeURL.split('/TheLibrary')[0]);
+            //localStorage.setItem('imageRootStorage', res.nativeURL.split('/TheLibrary')[0]);
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
         });
@@ -1588,7 +1594,7 @@ function download_10(storyId, storyCat) {
 }
 
 function downloadRest(storyId, storyCat, sounds, images) {
-    //alert('rest');
+    alert('rest');
     //alert(sounds + ' ' + images);
     for (var i = 10; i < sounds; i++) {
         var page = i + 1;
