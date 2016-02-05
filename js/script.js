@@ -1445,7 +1445,7 @@ function gotoStoryList() {
 
 function storeInPhone(data, category, id) {
     $.mobile.loading('hide');
-    alert('store in phone');
+    //alert('store in phone');
     storyObject.images = new Array();
     storyObject.sounds = new Array();
     storyCatGlobal = category;
@@ -1454,7 +1454,7 @@ function storeInPhone(data, category, id) {
     isFinishedSnd = false;
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
-        alert('before');
+        //alert('before');
         download_10(storyId, storyCat);
     }
 
@@ -1478,7 +1478,7 @@ function storeInPhone(data, category, id) {
     }
 
     var playTheStory = function () {
-        alert('play');
+        //alert('play');
         //localStorage.setItem('download_10', true);
         storyData = data;
         //alert(storyData['totalSounds']);
@@ -1543,7 +1543,7 @@ function getStoryById(id, category) {
              //alert('data:\n' + JSON.stringify(data));
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
-             alert('success');
+             //alert('success');
              dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
              storeInPhone(data, category, id);
 
@@ -1594,7 +1594,7 @@ function download_10(storyId, storyCat) {
 }
 
 function downloadRest(storyId, storyCat, sounds, images) {
-    alert('rest');
+    //alert('rest');
     //alert(sounds + ' ' + images);
     for (var i = 10; i < sounds; i++) {
         var page = i + 1;
