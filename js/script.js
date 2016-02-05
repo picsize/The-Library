@@ -6,8 +6,8 @@ var storyObject = {
     sounds: []
 }
 
-var soundRootStorage = (localStorage.setItem('soundRootStorage') != undefined) ? localStorage.setItem('soundRootStorage') : '';
-var imageRootStorage = (localStorage.setItem('imageRootStorage') != undefined) ? localStorage.setItem('imageRootStorage') : '';
+var soundRootStorage = (localStorage.getItem('soundRootStorage') != undefined) ? localStorage.getItem('soundRootStorage') : '';
+var imageRootStorage = (localStorage.getItem('imageRootStorage') != undefined) ? localStorage.getItem('imageRootStorage') : '';
 var storyCatGlobal = '';
 var appPath = '';
 var thisLocalStory = (localStorage.getItem('thisLocalStory') != undefined) ? localStorage.getItem('thisLocalStory') : '';
@@ -1508,6 +1508,7 @@ function getStories(category) {
 	            navigator.app.exitApp();
 	        } else {
 	            xhr.abort();
+	            $.mobile.changePage('#first_page');
 	        }
 	    },
 	    success: function (data) {
@@ -1530,6 +1531,7 @@ function getStoryById(id, category) {
                  navigator.app.exitApp();
              } else {
                  xhr.abort();
+                 $.mobile.changePage('#first_page');
              }
          },
          success: function (data) {
