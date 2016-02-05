@@ -5,8 +5,9 @@ var storyObject = {
     images: [],
     sounds: []
 }
-var soundRootStorage = '';
-var imageRootStorage = '';
+
+var soundRootStorage = (localStorage.setItem('soundRootStorage') != undefined) ? localStorage.setItem('soundRootStorage') : '';
+var imageRootStorage = (localStorage.setItem('imageRootStorage') != undefined) ? localStorage.setItem('imageRootStorage') : '';
 var storyCatGlobal = '';
 var appPath = '';
 var thisLocalStory = (localStorage.getItem('thisLocalStory') != undefined) ? localStorage.getItem('thisLocalStory') : '';
@@ -1538,9 +1539,11 @@ function getStoryById(id, category) {
              alert('thisStory: '+ thisStory);
              if (thisLocalStory != thisStory) {
                  localStorage.setItem('thisLocalStory', thisStory);
-                 //dm.remove('TheLibrary/' + thisLocalStory.split('_')[0], function () { alert('התיקייה נמחקה'); }, function () { alert('התיקייה לא נמחקה');});
-                 dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
-                 storeInPhone(data, category, id);
+                 dm.remove('TheLibrary/' + thisLocalStory.split('_')[0], function () {
+                     dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
+                     storeInPhone(data, category, id);
+                 }, function () { alert('התיקייה לא נמחקה'); });
+                 
              } else {
                  setStory(data);
              }
@@ -1551,7 +1554,7 @@ function getStoryById(id, category) {
 }
 
 function download_10(storyId, storyCat) {
-    alert('10');
+    //alert('10');
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
@@ -1571,6 +1574,9 @@ function download_10(storyId, storyCat) {
     } //end for images
 
     //dfd.resolve();
+
+    localStorage.setItem('soundRootStorage', soundRootStorage);
+    localStorage.setItem('imageRootStorage', imageRootStorage);
 }
 
 function downloadRest(storyId, storyCat, sounds, images) {
