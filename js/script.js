@@ -1538,7 +1538,7 @@ function getStoryById(id, category) {
              alert('thisStory: '+ thisStory);
              if (thisLocalStory != thisStory) {
                  localStorage.setItem('thisLocalStory', thisStory);
-                 dm.remove('TheLibrary/' + thisLocalStory.split('_')[0] + '/' + thisLocalStory.split('_')[1], function () { alert('התיקייה נמחקה'); }, function () { alert('התיקייה לא נמחקה');});
+                 dm.remove('TheLibrary/' + thisLocalStory.split('_')[0], function () { alert('התיקייה נמחקה'); }, function () { alert('התיקייה לא נמחקה');});
                  dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
                  storeInPhone(data, category, id);
              } else {
@@ -1551,7 +1551,7 @@ function getStoryById(id, category) {
 }
 
 function download_10(storyId, storyCat) {
-    //alert('10');
+    alert('10');
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
