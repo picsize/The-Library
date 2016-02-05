@@ -1542,6 +1542,7 @@ function getStoryById(id, category) {
              //alert('thisStory: '+ thisStory);
              if (thisLocalStory != thisStory) {
                  localStorage.setItem('thisLocalStory', thisStory);
+                 dm.create_r('TheLibrary/story', Log('created successfully'));
                  //dm.remove('TheLibrary/' + thisLocalStory.split('_')[0], function () {
                  //    dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
                      
