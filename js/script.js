@@ -1454,6 +1454,8 @@ function storeInPhone(data, category, id) {
 
     var loadComponents = function () {
         if (count <= 0) {
+            alert('count <= 0');
+            $.mobile.loading('hide');
             done_callback();
         }
         else {
@@ -1464,6 +1466,7 @@ function storeInPhone(data, category, id) {
                 theme: "a",
                 html: ''
             });
+            alert(count);
             setTimeout(loadComponents, 1000);
         }
     }
