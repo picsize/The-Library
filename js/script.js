@@ -6,6 +6,8 @@ var storyObject = {
     sounds: []
 }
 
+alert('111');
+
 var soundRootStorage = (localStorage.getItem('soundRootStorage') != undefined) ? localStorage.getItem('soundRootStorage') : '';
 alert(soundRootStorage);
 var imageRootStorage = (localStorage.getItem('imageRootStorage') != undefined) ? localStorage.getItem('imageRootStorage') : '';
@@ -1542,10 +1544,12 @@ function getStoryById(id, category) {
              //alert('thisStory: '+ thisStory);
              if (thisLocalStory != thisStory) {
                  localStorage.setItem('thisLocalStory', thisStory);
-                 dm.remove('TheLibrary/' + thisLocalStory.split('_')[0], function () {
-                     dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
-                     storeInPhone(data, category, id);
-                 }, function () { alert('התיקייה לא נמחקה'); });
+                 //dm.remove('TheLibrary/' + thisLocalStory.split('_')[0], function () {
+                     
+                 //}, function () { alert('התיקייה לא נמחקה'); });
+
+                 dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
+                 storeInPhone(data, category, id);
                  
              } else {
                  setStory(data);
@@ -1586,7 +1590,7 @@ function download_10(storyId, storyCat) {
 function downloadRest(storyId, storyCat, sounds, images) {
     //alert('rest');
     //alert(sounds + ' ' + images);
-    for (var i = 0; i < sounds; i++) {
+    for (var i = 10; i < sounds; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
             soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
