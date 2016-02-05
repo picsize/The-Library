@@ -1169,7 +1169,7 @@ function setStory(dataSend) {
 
         //imageRootStorage + + '/TheLibrary/' + category + '/story'+
         try {
-            voiceSrc = soundRootStorage + '/TheLibrary/' + category + '/story' + currentStory + '/' + storyPage + '.mp3';
+            voiceSrc = soundRootStorage + '/TheLibrary/story/' + storyPage + '.mp3';
             playFile(voiceSrc);
         } catch (e) {
             voiceSrc = "http://www.kidnet.co.il/books/server/stories/" + category + "/story" + currentStory + "/" + storyPage + ".mp3";
@@ -1443,8 +1443,15 @@ function storeInPhone(data, category, id) {
     isFinishedImg = false;
     isFinishedSnd = false;
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
-        done_callback = cb;
-        download_10(storyId, storyCat);
+        if (thisLocalStory != localStorage.getItem('thisLocalStory')) {
+            fm.remove('TheLibrary/story', Log('complete delte'), Log('delete fail'));
+            done_callback = cb;
+            download_10(storyId, storyCat);
+        } else {
+            storyData = data;
+            setStory(data);
+        }
+        
     }
 
     var loadComponents = function () {
@@ -1464,7 +1471,8 @@ function storeInPhone(data, category, id) {
     }
 
     var playTheStory = function () {
-        //alert('play');
+        //$.mobile.loading("hide");
+        alert('play');
         //localStorage.setItem('download_10', true);
         storyData = data;
         //alert(storyData['totalSounds']);
@@ -1529,6 +1537,7 @@ function getStoryById(id, category) {
 	    success: function (data) {
 	        //alert('data:\n' + JSON.stringify(data));
 	        localStorage.setItem('lastPageLoaded', 0);
+	        localStorage.setItem('thisLocalStory', category + '_' + id);
 	        storeInPhone(data, category, id);
 
 	    }
