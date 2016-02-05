@@ -10,7 +10,7 @@ var imageRootStorage = '';
 var storyCatGlobal = '';
 var appPath = '';
 var thisLocalStory = (localStorage.getItem('thisLocalStory') != undefined) ? localStorage.getItem('thisLocalStory') : '';
-
+alert(thisLocalStory);
 var url1_width;
 var url1_height;
 var url2_width;
@@ -1440,6 +1440,7 @@ function gotoStoryList() {
 }
 
 function storeInPhone(data, category, id) {
+    $.mobile.loading('hide');
     storyObject.images = new Array();
     storyObject.sounds = new Array();
     storyCatGlobal = category;
@@ -1531,6 +1532,7 @@ function getStoryById(id, category) {
              //alert('data:\n' + JSON.stringify(data));
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
+             alert('thisStory: '+ thisStory);
              if (thisLocalStory != thisStory) {
                  localStorage.setItem('thisLocalStory', thisStory);
                  dm.remove('TheLibrary/' + thisLocalStory.split('_')[0] + '/' + thisLocalStory.split('_')[1], function () { alert('התיקייה נמחקה'); }, function () { alert('התיקייה לא נמחקה');});
