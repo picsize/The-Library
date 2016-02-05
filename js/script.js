@@ -1449,7 +1449,7 @@ function storeInPhone(data, category, id) {
     isFinishedSnd = false;
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
-        downloadRest(id, category, data['totalSounds'], data['totalImages']);
+        downloadRest(id, category, dataFromServer['totalSounds'], dataFromServer['totalImages']);
         //download_10(storyId, storyCat);
     }
 
@@ -1574,8 +1574,8 @@ function download_10(storyId, storyCat) {
 }
 
 function downloadRest(storyId, storyCat, sounds, images) {
-    //alert('rest');
-    //alert(sounds + ' ' + images);
+    alert('rest');
+    alert(sounds + ' ' + images);
     for (var i = 0; i < sounds; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
@@ -1583,14 +1583,18 @@ function downloadRest(storyId, storyCat, sounds, images) {
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
         });
+
+        fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/story', page + '.mp3', function (res) {});
     } //end for sounds
 
-    for (var i = 10; i < images; i++) {
+    for (var i = 0; i < images; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
             imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
         });
+
+        fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/story', page + '.mp3', function (res) { });
     } //end for images
 }
