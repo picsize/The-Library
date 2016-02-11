@@ -1533,9 +1533,8 @@ function getStoryById(id, category) {
              //alert('data:\n' + JSON.stringify(data));
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
-             //alert('success');
+             alert('success');
              dm.create_r('TheLibrary/' + category + '/story' + id, function () {
-                 alter('folder created');
                  download_10(id, category);
                  downloadRest(id, category, data['totalSounds'], data['totalImages']);
                  storeInPhone(data, category, id);
