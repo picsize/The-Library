@@ -1537,10 +1537,13 @@ function getStoryById(id, category) {
              //alert('success');
              dm.remove('TheLibrary/story', function () {
                  alert('delete');
-                 dm.create_r('TheLibrary/story', function () {
-                     alert('create');
-                     download_10(id, category, data);
-                     //downloadRest(id, category, data['totalSounds'], data['totalImages']);
+                 dm.create_r('TheLibrary', function () {
+                     alert('create main');
+                     dm.create_r('TheLibrary/story', function () {
+                         alert('create sub');
+                         download_10(id, category, data);
+                         //downloadRest(id, category, data['totalSounds'], data['totalImages']);
+                     });
                  });
              }, Log('delete fail'));
              
