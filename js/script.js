@@ -1535,10 +1535,15 @@ function getStoryById(id, category) {
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
              //alert('success');
-             dm.create_r('TheLibrary/story', function () {
-                 download_10(id, category, data);
-                 //downloadRest(id, category, data['totalSounds'], data['totalImages']);
-             });
+             dm.remove('TheLibrary/story', function () {
+                 alert('delete');
+                 dm.create_r('TheLibrary/story', function () {
+                     alert('create');
+                     download_10(id, category, data);
+                     //downloadRest(id, category, data['totalSounds'], data['totalImages']);
+                 });
+             }, Log('delete fail'));
+             
              
          }
      });
@@ -1575,7 +1580,6 @@ function download_10(storyId, storyCat, data) {
 
     var download_interval = setInterval(function () {
         if (complete_10_images && complete_10_images) {
-            alert('complete');
             clearInterval(download_interval);
             storeInPhone(data, storyCat, storyId);
         }
