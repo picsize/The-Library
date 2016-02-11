@@ -6,12 +6,9 @@ var storyObject = {
     sounds: []
 }
 
-alert('111');
-
+alert('יום שלישי');
 var soundRootStorage = (localStorage.getItem('soundRootStorage') != undefined) ? localStorage.getItem('soundRootStorage') : '';
-alert(soundRootStorage);
 var imageRootStorage = (localStorage.getItem('imageRootStorage') != undefined) ? localStorage.getItem('imageRootStorage') : '';
-alert(imageRootStorage);
 var storyCatGlobal = '';
 var appPath = '';
 var thisLocalStory = (localStorage.getItem('thisLocalStory') != undefined) ? localStorage.getItem('thisLocalStory') : '';
@@ -1567,12 +1564,10 @@ function getStoryById(id, category) {
 }
 
 function download_10(storyId, storyCat) {
-    alert('10');
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
             soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
-            alert('sound: '+ res);
             //localStorage.setItem('soundRootStorage', res.nativeURL.split('/TheLibrary')[0]);
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
@@ -1583,7 +1578,6 @@ function download_10(storyId, storyCat) {
         var page = i + 1;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
             imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
-            alert('image: ' + res);
             //localStorage.setItem('imageRootStorage', res.nativeURL.split('/TheLibrary')[0]);
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
