@@ -1535,19 +1535,15 @@ function getStoryById(id, category) {
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
              //alert('success');
-             dm.remove('TheLibrary', function () {
-                 alert('delete');
-                 dm.create_r('TheLibrary', function () {
-                     alert('create main');
-                     dm.create_r('TheLibrary/story', function () {
-                         alert('create sub');
-                         download_10(id, category, data);
-                         //downloadRest(id, category, data['totalSounds'], data['totalImages']);
-                     });
-                 });
-             }, Log('delete fail'));
+             //dm.remove('TheLibrary/story', function () {
+             //    alert('delete');
+             //    dm.create_r('TheLibrary', function () {
+             //        alert('create main');
+                     
+             //    });
+             //}, Log('delete fail'));
              
-             
+             clearDirectory(id, category, data);
          }
      });
 }
@@ -1609,4 +1605,32 @@ function downloadRest(storyId, storyCat, sounds, images) {
             storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
         });
     } //end for images
+}
+
+function clearDirectory(id, category, data) {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+
+    var fail = function (evt) {
+        alert("FILE SYSTEM FAILURE" + evt.target.error.code);
+    }
+
+    var onFileSystemSuccess = function (fileSystem) {
+        fileSystem.root.getDirectory(
+             "TheLibrary/story",
+            { create: true, exclusive: false },
+            function (entry) {
+                entry.removeRecursively(function () {
+                    alert("Remove Recursively Succeeded");
+                    mass_download(id, category, data);
+                }, fail);
+            }, fail);
+    }
+}
+
+function mass_download(id, category, data) {
+    dm.create_r('TheLibrary/story', function () {
+        alert('create sub');
+        download_10(id, category, data);
+        //downloadRest(id, category, data['totalSounds'], data['totalImages']);
+    });
 }
