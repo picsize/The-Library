@@ -1536,7 +1536,7 @@ function getStoryById(id, category) {
              var thisStory = category + '_' + id;
              //alert('success');
              dm.create_r('TheLibrary/story', function () {
-                 download_10(id, category);
+                 download_10(id, category, data);
                  //downloadRest(id, category, data['totalSounds'], data['totalImages']);
              });
              
@@ -1544,7 +1544,7 @@ function getStoryById(id, category) {
      });
 }
 
-function download_10(storyId, storyCat) {
+function download_10(storyId, storyCat, data) {
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
         var complete_10_sounds = false;
@@ -1574,6 +1574,7 @@ function download_10(storyId, storyCat) {
     } //end for images
 
     var download_interval = setInterval(function () {
+        alert(complete_10_images  + '&&' + complete_10_images);
         if (complete_10_images && complete_10_images) {
             clearInterval(download_interval);
             storeInPhone(data, category, id);
