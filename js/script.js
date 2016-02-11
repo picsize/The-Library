@@ -1538,8 +1538,9 @@ function getStoryById(id, category) {
                  alter('folder created');
                  download_10(id, category);
                  downloadRest(id, category, data['totalSounds'], data['totalImages']);
+                 storeInPhone(data, category, id);
              });
-             storeInPhone(data, category, id);
+             
          }
      });
 }
