@@ -1477,6 +1477,7 @@ function storeInPhone(data, category, id) {
     }
 
     downloadStoryFiles(data, category, id, playTheStory);
+    downloadRest(id, category, data['totalSounds'], data['totalImages']);
     loadComponents();
 
 }
@@ -1533,11 +1534,10 @@ function getStoryById(id, category) {
              //alert('data:\n' + JSON.stringify(data));
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
-             alert('success');
+             //alert('success');
              dm.create_r('TheLibrary/' + category + '/story' + id, function () {
                  download_10(id, category);
-                 downloadRest(id, category, data['totalSounds'], data['totalImages']);
-                 storeInPhone(data, category, id);
+                 //downloadRest(id, category, data['totalSounds'], data['totalImages']);
              });
              
          }
@@ -1547,25 +1547,38 @@ function getStoryById(id, category) {
 function download_10(storyId, storyCat) {
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
+        var complete_10_sounds = false;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.mp3', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.mp3', function (res) {
             soundRootStorage = res.nativeURL.split('/TheLibrary')[0];
             //localStorage.setItem('soundRootStorage', res.nativeURL.split('/TheLibrary')[0]);
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.sounds.push({ id: parseInt(number), url: res.nativeURL });
+            if (page == 10) {
+                complete_10_sounds = true;
+            }
         });
     } //end for sounds
 
     for (var i = 0; i < 10; i++) {
         var page = i + 1;
+        var complete_10_images = false;
         fm.download_file(mainURL + storyCat + '/story' + storyId + '/' + page + '.jpg', 'TheLibrary/' + storyCat + '/story' + storyId, page + '.jpg', function (res) {
             imageRootStorage = res.nativeURL.split('/TheLibrary')[0];
             //localStorage.setItem('imageRootStorage', res.nativeURL.split('/TheLibrary')[0]);
             var number = res.nativeURL.split('/')[res.nativeURL.split('/').length - 1].split('.')[0];
             storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
+            if (page == 10) {
+                complete_10_images = true;
+            }
         });
     } //end for images
 
-    //dfd.resolve();
+    var download_interval = setInterval(function () {
+        if (complete_10_images && complete_10_images) {
+            clearInterval(download_interval);
+            storeInPhone(data, category, id);
+        }
+    }, 500);
 }
 
 function downloadRest(storyId, storyCat, sounds, images) {
