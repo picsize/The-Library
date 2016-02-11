@@ -1574,10 +1574,10 @@ function download_10(storyId, storyCat, data) {
     } //end for images
 
     var download_interval = setInterval(function () {
-        alert(complete_10_images  + '&&' + complete_10_images);
         if (complete_10_images && complete_10_images) {
+            alert('complete');
             clearInterval(download_interval);
-            storeInPhone(data, category, id);
+            storeInPhone(data, storyCat, storyId);
         }
     }, 500);
 }
