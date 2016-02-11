@@ -1534,9 +1534,11 @@ function getStoryById(id, category) {
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
              //alert('success');
-             download_10(id, category);
-             downloadRest(id, category, data['totalSounds'], data['totalImages']);
-             //dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
+             dm.create_r('TheLibrary/' + category + '/story' + id, function () {
+                 alter('folder created');
+                 download_10(id, category);
+                 downloadRest(id, category, data['totalSounds'], data['totalImages']);
+             });
              storeInPhone(data, category, id);
          }
      });
