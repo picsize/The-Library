@@ -1535,7 +1535,7 @@ function getStoryById(id, category) {
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
              //alert('success');
-             dm.remove('TheLibrary/story', function () {
+             dm.remove('TheLibrary', function () {
                  alert('delete');
                  dm.create_r('TheLibrary', function () {
                      alert('create main');
