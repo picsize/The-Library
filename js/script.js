@@ -1442,7 +1442,6 @@ function gotoStoryList() {
 
 function storeInPhone(data, category, id) {
     $.mobile.loading('hide');
-    //alert('store in phone');
     storyObject.images = new Array();
     storyObject.sounds = new Array();
     storyCatGlobal = category;
@@ -1451,13 +1450,11 @@ function storeInPhone(data, category, id) {
     isFinishedSnd = false;
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
-        //alert('before');
-        download_10(storyId, storyCat);
+        //download_10(storyId, storyCat);
     }
 
     var loadComponents = function () {
         if (count <= 0) {
-            //alert('count <= 0');
             $.mobile.loading('hide');
             done_callback();
         }
@@ -1469,17 +1466,13 @@ function storeInPhone(data, category, id) {
                 theme: "a",
                 html: ''
             });
-            //alert(count);
             setTimeout(loadComponents, 1000);
         }
     }
 
     var playTheStory = function () {
-        //alert('play');
-        //localStorage.setItem('download_10', true);
         storyData = data;
-        //alert(storyData['totalSounds']);
-        downloadRest(id, category, storyData['totalSounds'], storyData['totalImages']);
+        //downloadRest(id, category, storyData['totalSounds'], storyData['totalImages']);
         setStory(data);
     }
 
@@ -1541,24 +1534,10 @@ function getStoryById(id, category) {
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
              //alert('success');
-             dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
+             download_10(id, category);
+             downloadRest(id, category, data['totalSounds'], data['totalImages']);
+             //dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
              storeInPhone(data, category, id);
-
-             //alert('thisStory: '+ thisStory);
-             //if (thisLocalStory != thisStory) {
-             //    localStorage.setItem('thisLocalStory', thisStory);
-             //    //dm.remove('TheLibrary/' + thisLocalStory.split('_')[0], function () {
-                     
-             //    //}, function () { alert('התיקייה לא נמחקה'); });
-
-             //    dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
-             //    storeInPhone(data, category, id);
-                 
-             //} else {
-             //    setStory(data);
-             //}
-             
-
          }
      });
 }
