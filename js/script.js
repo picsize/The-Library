@@ -6,7 +6,7 @@ var storyObject = {
     sounds: []
 }
 
-alert('יום שישי');
+alert('1יום שישי');
 var soundRootStorage = (localStorage.getItem('soundRootStorage') != undefined) ? localStorage.getItem('soundRootStorage') : '';
 var imageRootStorage = (localStorage.getItem('imageRootStorage') != undefined) ? localStorage.getItem('imageRootStorage') : '';
 var storyCatGlobal = '';
@@ -1534,7 +1534,6 @@ function getStoryById(id, category) {
              //alert('data:\n' + JSON.stringify(data));
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
-             location.reload();
              download_10(id, category, data);
              //dm.create_r('TheLibrary/story', function () {
              //    download_10(id, category, data);
