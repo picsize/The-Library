@@ -1534,10 +1534,10 @@ function getStoryById(id, category) {
              //alert('data:\n' + JSON.stringify(data));
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
-             download_10(id, category, data);
-             //dm.create_r('TheLibrary/story', function () {
-             //    download_10(id, category, data);
-             //});
+             //download_10(id, category, data);
+             dm.create_r('TheLibrary/story', function () {
+                 download_10(id, category, data);
+             });
              
              //clearDirectory(id, category, data);
          }
