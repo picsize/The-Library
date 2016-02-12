@@ -1534,16 +1534,7 @@ function getStoryById(id, category) {
              //alert('data:\n' + JSON.stringify(data));
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
-             alert('success');
-             //dm.remove('TheLibrary/story', function () {
-             //    alert('delete');
-             //    dm.create_r('TheLibrary/story', function () {
-             //        alert('create main');
-             //    });
-             //}, Log('delete fail'));
-
              dm.create_r('TheLibrary/story', function () {
-                 alert('create story folder');
                  download_10(id, category, data);
              });
              
@@ -1584,6 +1575,7 @@ function download_10(storyId, storyCat, data) {
     var download_interval = setInterval(function () {
         if (complete_10_images && complete_10_images) {
             clearInterval(download_interval);
+            $(imgS1).attr('src', imageRootStorage + '/TheLibrary/story/1.jpg');
             storeInPhone(data, storyCat, storyId);
         }
     }, 500);
@@ -1611,10 +1603,3 @@ function downloadRest(storyId, storyCat, sounds, images) {
     } //end for images
 }
 
-function mass_download(id, category, data) {
-    dm.create_r('TheLibrary/story', function () {
-        alert('create sub');
-        download_10(id, category, data);
-        //downloadRest(id, category, data['totalSounds'], data['totalImages']);
-    });
-}
