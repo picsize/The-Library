@@ -1608,13 +1608,15 @@ function downloadRest(storyId, storyCat, sounds, images) {
 }
 
 function clearDirectory(id, category, data) {
+    alert('clear directory');
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
-
+    alert('after requestFileSystem');
     var fail = function (evt) {
         alert("FILE SYSTEM FAILURE" + evt.target.error.code);
     }
 
     var onFileSystemSuccess = function (fileSystem) {
+        alert('onFileSystemSuccess');
         fileSystem.root.getDirectory(
              "TheLibrary/story",
             { create: true, exclusive: false },
