@@ -6,7 +6,7 @@ var storyObject = {
     sounds: []
 }
 
-alert('יום שלישי');
+alert('יום שישי');
 var soundRootStorage = (localStorage.getItem('soundRootStorage') != undefined) ? localStorage.getItem('soundRootStorage') : '';
 var imageRootStorage = (localStorage.getItem('imageRootStorage') != undefined) ? localStorage.getItem('imageRootStorage') : '';
 var storyCatGlobal = '';
@@ -1534,9 +1534,11 @@ function getStoryById(id, category) {
              //alert('data:\n' + JSON.stringify(data));
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
-             dm.create_r('TheLibrary/story', function () {
-                 download_10(id, category, data);
-             });
+             location.reload();
+             download_10(id, category, data);
+             //dm.create_r('TheLibrary/story', function () {
+             //    download_10(id, category, data);
+             //});
              
              //clearDirectory(id, category, data);
          }
@@ -1575,7 +1577,8 @@ function download_10(storyId, storyCat, data) {
     var download_interval = setInterval(function () {
         if (complete_10_images && complete_10_images) {
             clearInterval(download_interval);
-            $(imgS1).attr('src', imageRootStorage + '/TheLibrary/story/1.jpg');
+            $(imgS1).removeAttr('src');
+            $('#flipbook').removeAttr('style');
             storeInPhone(data, storyCat, storyId);
         }
     }, 500);
