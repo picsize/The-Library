@@ -1534,16 +1534,20 @@ function getStoryById(id, category) {
              //alert('data:\n' + JSON.stringify(data));
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
-             //alert('success');
+             alert('success');
              //dm.remove('TheLibrary/story', function () {
              //    alert('delete');
-             //    dm.create_r('TheLibrary', function () {
+             //    dm.create_r('TheLibrary/story', function () {
              //        alert('create main');
-                     
              //    });
              //}, Log('delete fail'));
+
+             dm.create_r('TheLibrary/story', function () {
+                 alert('create story folder');
+                 download_10(id, category, data);
+             });
              
-             clearDirectory(id, category, data);
+             //clearDirectory(id, category, data);
          }
      });
 }
@@ -1605,28 +1609,6 @@ function downloadRest(storyId, storyCat, sounds, images) {
             storyObject.images.push({ id: parseInt(number), url: res.nativeURL });
         });
     } //end for images
-}
-
-function clearDirectory(id, category, data) {
-    alert('clear directory');
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
-    alert('after requestFileSystem');
-    function fail(evt) {
-        alert("FILE SYSTEM FAILURE" + evt.target.error.code);
-    }
-
-    function onFileSystemSuccess(fileSystem) {
-        alert('onFileSystemSuccess');
-        fileSystem.root.getDirectory(
-             "TheLibrary/story",
-            { create: true, exclusive: false },
-            function (entry) {
-                entry.removeRecursively(function () {
-                    alert("Remove Recursively Succeeded");
-                    mass_download(id, category, data);
-                }, fail);
-            }, fail);
-    }
 }
 
 function mass_download(id, category, data) {
