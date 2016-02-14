@@ -6,7 +6,7 @@ var storyObject = {
     sounds: []
 }
 
-alert('1יום שישי');
+alert('יום ראשון');
 var soundRootStorage = (localStorage.getItem('soundRootStorage') != undefined) ? localStorage.getItem('soundRootStorage') : '';
 var imageRootStorage = (localStorage.getItem('imageRootStorage') != undefined) ? localStorage.getItem('imageRootStorage') : '';
 var storyCatGlobal = '';
