@@ -1534,8 +1534,10 @@ function getStoryById(id, category) {
              //alert('data:\n' + JSON.stringify(data));
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
+             alert('success');
              //download_10(id, category, data);
              dm.create_r('TheLibrary/story', function () {
+                 alert('create dir');
                  download_10(id, category, data);
              });
              
@@ -1545,6 +1547,7 @@ function getStoryById(id, category) {
 }
 
 function download_10(storyId, storyCat, data) {
+    alert('10');
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
         var complete_10_sounds = false;
@@ -1576,8 +1579,8 @@ function download_10(storyId, storyCat, data) {
     var download_interval = setInterval(function () {
         if (complete_10_images && complete_10_images) {
             clearInterval(download_interval);
-            $(imgS1).removeAttr('src');
-            $('#flipbook').removeAttr('style');
+            //$(imgS1).removeAttr('src');
+            //$('#flipbook').removeAttr('style');
             storeInPhone(data, storyCat, storyId);
         }
     }, 500);
