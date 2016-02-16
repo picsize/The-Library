@@ -1067,7 +1067,7 @@ function setPagesScroll() {
 
 //Core function - Sets the story by the daa sent from server.
 function setStory(dataSend) {
-    alert('setStory');
+    alert('setStory: ' + dataSend.amount);
     //alert(JSON.stringify(storyObject.images));
     //alert(JSON.stringify(storyObject.sounds));
 
