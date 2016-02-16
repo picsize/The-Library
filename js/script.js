@@ -1542,23 +1542,10 @@ function getStoryById(id, category) {
              var thisStory = category + '_' + id;
              //alert('success');
              dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
-             storeInPhone(data, category, id);
-
-             //alert('thisStory: '+ thisStory);
-             //if (thisLocalStory != thisStory) {
-             //    localStorage.setItem('thisLocalStory', thisStory);
-             //    //dm.remove('TheLibrary/' + thisLocalStory.split('_')[0], function () {
-
-             //    //}, function () { alert('התיקייה לא נמחקה'); });
-
-             //    dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
-             //    storeInPhone(data, category, id);
-
-             //} else {
-             //    setStory(data);
-             //}
-
-
+             download_10(storyId, storyCat);
+             downloadRest(id, category, data['totalSounds'], data['totalImages']);
+             storyData = data;
+             setStory(data);
          }
      });
 }
