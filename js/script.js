@@ -1541,9 +1541,8 @@ function getStoryById(id, category) {
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
              //alert('success');
-             dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
+             //dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
              //download_10(storyId, storyCat)
-             
              storeInPhone(data, category, id);
 
 
