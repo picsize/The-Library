@@ -1548,7 +1548,6 @@ function getStoryById(id, category) {
 }
 
 function download_10(storyId, storyCat, data) {
-    alert('10');
     for (var i = 0; i < 10 ; i++) {
         var page = i + 1;
         var complete_10_sounds = false;
@@ -1580,9 +1579,9 @@ function download_10(storyId, storyCat, data) {
     var download_interval = setInterval(function () {
         if (complete_10_images && complete_10_images) {
             clearInterval(download_interval);
-            //$(imgS1).removeAttr('src');
-            //$('#flipbook').removeAttr('style');
-            storeInPhone(data, storyCat, storyId);
+            storyData = data;
+            downloadRest(storyId, storyCat, storyData['totalSounds'], storyData['totalImages']);            
+            setStory(data);
         }
     }, 500);
 }
