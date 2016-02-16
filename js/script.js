@@ -1542,10 +1542,11 @@ function getStoryById(id, category) {
              var thisStory = category + '_' + id;
              //alert('success');
              dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
-             download_10(storyId, storyCat);
-             downloadRest(id, category, data['totalSounds'], data['totalImages']);
-             storyData = data;
-             setStory(data);
+             download_10(storyId, storyCat)
+             
+             storeInPhone(data, category, id);
+
+
          }
      });
 }
