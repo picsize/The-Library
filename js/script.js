@@ -1456,7 +1456,8 @@ function storeInPhone(data, category, id) {
     var loadComponents = function () {
         if (count <= 0) {
             $.mobile.loading('hide');
-            done_callback();
+            storyData = data;
+            setStory(data);
         }
         else {
             count--;
@@ -1476,7 +1477,7 @@ function storeInPhone(data, category, id) {
         setStory(data);
     }
 
-    downloadStoryFiles(data, category, id, playTheStory);
+    //downloadStoryFiles(data, category, id, playTheStory);
     downloadRest(id, category, data['totalSounds'], data['totalImages']);
     loadComponents();
 
