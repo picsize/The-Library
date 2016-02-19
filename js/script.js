@@ -1535,9 +1535,6 @@ function getStoryById(id, category) {
              }
          },
          success: function (data) {
-             //alert('data:\n' + JSON.stringify(data));
-             localStorage.setItem('lastPageLoaded', 0);
-             var thisStory = category + '_' + id;
              //alert('success');
              //
              try {
@@ -1561,9 +1558,12 @@ function getStoryById(id, category) {
                  alert(JSON.stringify(e));
              }
 
-             dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
-             download_10(storyId, storyCat);
-             storeInPhone(data, category, id);
+             dm.create_r('TheLibrary/' + category + '/story' + id, function () {
+                 download_10(id, category);
+                 storeInPhone(data, category, id);
+             });
+            
+             
          }
      });
 }
