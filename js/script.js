@@ -1476,16 +1476,13 @@ function storeInPhone(data, category, id) {
     }
 
     var playTheStory = function () {
-        //alert('play');
-        //localStorage.setItem('download_10', true);
         storyData = data;
-        //alert(storyData['totalSounds']);
-        downloadRest(id, category, storyData['totalSounds'], storyData['totalImages']);
         setStory(data);
     }
 
     downloadStoryFiles(data, category, id, playTheStory);
     loadComponents();
+    downloadRest(id, category, data['totalSounds'], data['totalImages']);
 
 }
 
@@ -1542,24 +1539,10 @@ function getStoryById(id, category) {
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
              //alert('success');
+             alert(category);
+             //dm.remove('folder_a/folder_b', Log('complete delte'), Log('delete fail'));
              dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
              storeInPhone(data, category, id);
-
-             //alert('thisStory: '+ thisStory);
-             //if (thisLocalStory != thisStory) {
-             //    localStorage.setItem('thisLocalStory', thisStory);
-             //    //dm.remove('TheLibrary/' + thisLocalStory.split('_')[0], function () {
-
-             //    //}, function () { alert('התיקייה לא נמחקה'); });
-
-             //    dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
-             //    storeInPhone(data, category, id);
-
-             //} else {
-             //    setStory(data);
-             //}
-
-
          }
      });
 }
