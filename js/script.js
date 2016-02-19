@@ -1595,3 +1595,13 @@ function downloadRest(storyId, storyCat, sounds, images) {
         });
     } //end for images
 }
+
+//nextStoryPage() prevStoryPage();
+
+$(document).on('swipeleft', function () {
+    alert('swipeleft');
+});
+
+$(document).on('swiperight', function () {
+    alert('swiperight');
+});
