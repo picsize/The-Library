@@ -1619,15 +1619,17 @@ function downloadRest(storyId, storyCat, sounds, images) {
 
 //nextStoryPage() prevStoryPage();
 
-$(document).on('swipeleft', function () {
+$(document).on('swipeleft', function (e) {
     //next
+    e.preventDefault();
     if ($('#third_page').css('display') != 'none') {
         nextStoryPage();
     }
 });
 
-$(document).on('swiperight', function () {
+$(document).on('swiperight', function (e) {
     //prev
+    e.preventDefault();
     if ($('#third_page').css('display') != 'none') {
         prevStoryPage();
     }
