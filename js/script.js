@@ -1478,11 +1478,11 @@ function storeInPhone(data, category, id) {
     var playTheStory = function () {
         storyData = data;
         setStory(data);
+        downloadRest(id, category, storyData['totalSounds'], storyData['totalImages']);
     }
 
     downloadStoryFiles(data, category, id, playTheStory);
     loadComponents();
-    downloadRest(id, category, data['totalSounds'], data['totalImages']);
 
 }
 
@@ -1539,7 +1539,6 @@ function getStoryById(id, category) {
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
              //alert('success');
-             alert(category);
              //dm.remove('folder_a/folder_b', Log('complete delte'), Log('delete fail'));
              dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
              storeInPhone(data, category, id);
@@ -1599,9 +1598,15 @@ function downloadRest(storyId, storyCat, sounds, images) {
 //nextStoryPage() prevStoryPage();
 
 $(document).on('swipeleft', function () {
-    alert('swipeleft');
+    //next
+    if ($('#third_page').css('display') != 'none') {
+        nextStoryPage();
+    }
 });
 
 $(document).on('swiperight', function () {
-    alert('swiperight');
+    //prev
+    if ($('#third_page').css('display') != 'none') {
+        prevStoryPage();
+    }
 });
