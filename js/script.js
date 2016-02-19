@@ -1619,7 +1619,7 @@ function downloadRest(storyId, storyCat, sounds, images) {
 
 //nextStoryPage() prevStoryPage();
 
-$(document).on('swipeleft', function (e) {
+/*$(document).on('swipeleft', function (e) {
     //next
     e.preventDefault();
     if ($('#third_page').css('display') != 'none') {
@@ -1633,4 +1633,4 @@ $(document).on('swiperight', function (e) {
     if ($('#third_page').css('display') != 'none') {
         prevStoryPage();
     }
-});
+});*/
