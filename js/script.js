@@ -1478,7 +1478,6 @@ function storeInPhone(data, category, id) {
     var playTheStory = function () {
         storyData = data;
         setStory(data);
-        downloadRest(id, category, storyData['totalSounds'], storyData['totalImages']);
     }
 
     downloadStoryFiles(data, category, id, playTheStory);
@@ -1555,11 +1554,12 @@ function getStoryById(id, category) {
 
                  }
              } catch (e) {
-                 alert(JSON.stringify(e));
+                 //alert(JSON.stringify(e));
              }
 
              dm.create_r('TheLibrary/' + category + '/story' + id, function () {
                  download_10(id, category);
+                 downloadRest(id, category, data['totalSounds'], data['totalImages']);
                  storeInPhone(data, category, id);
              });
             
@@ -1621,7 +1621,6 @@ function downloadRest(storyId, storyCat, sounds, images) {
 
 $(document).on('swipeleft', function () {
     //next
-    alert($('#third_page').css('display'));
     if ($('#third_page').css('display') != 'none') {
         nextStoryPage();
     }
@@ -1629,7 +1628,6 @@ $(document).on('swipeleft', function () {
 
 $(document).on('swiperight', function () {
     //prev
-    alert($('#third_page').css('display'));
     if ($('#third_page').css('display') != 'none') {
         prevStoryPage();
     }
