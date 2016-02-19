@@ -1540,22 +1540,25 @@ function getStoryById(id, category) {
              var thisStory = category + '_' + id;
              //alert('success');
              //
-               
-             switch (category) {
-                 case 'leg': {
-                     dm.remove('TheLibrary/mash', Log('complete delte'), Log('delete fail'));
-                     dm.remove('TheLibrary/adv', Log('complete delte'), Log('delete fail'));
-                 } break;
-                 case 'mash': {
-                     dm.remove('TheLibrary/leg', Log('complete delte'), Log('delete fail'));
-                     dm.remove('TheLibrary/adv', Log('complete delte'), Log('delete fail'));
-                 } break;
-                 case 'adv': {
-                     dm.remove('TheLibrary/leg', Log('complete delte'), Log('delete fail'));
-                     dm.remove('TheLibrary/mash', Log('complete delte'), Log('delete fail'));
-                 } break;
-                 default: { } break;
+             try {
+                 switch (category) {
+                     case 'leg': {
+                         dm.remove('TheLibrary/mash', Log('complete delte'), Log('delete fail'));
+                         dm.remove('TheLibrary/adv', Log('complete delte'), Log('delete fail'));
+                     } break;
+                     case 'mash': {
+                         dm.remove('TheLibrary/leg', Log('complete delte'), Log('delete fail'));
+                         dm.remove('TheLibrary/adv', Log('complete delte'), Log('delete fail'));
+                     } break;
+                     case 'adv': {
+                         dm.remove('TheLibrary/leg', Log('complete delte'), Log('delete fail'));
+                         dm.remove('TheLibrary/mash', Log('complete delte'), Log('delete fail'));
+                     } break;
+                     default: { } break;
 
+                 }
+             } catch (e) {
+                 alert(JSON.stringify(e));
              }
 
              dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
@@ -1619,15 +1622,15 @@ function downloadRest(storyId, storyCat, sounds, images) {
 $(document).on('swipeleft', function () {
     //next
     alert($('#third_page').css('display'));
-    //if ($('#third_page').css('display') != 'none') {
-    //    nextStoryPage();
-    //}
+    if ($('#third_page').css('display') != 'none') {
+        nextStoryPage();
+    }
 });
 
 $(document).on('swiperight', function () {
     //prev
     alert($('#third_page').css('display'));
-    //if ($('#third_page').css('display') != 'none') {
-    //    prevStoryPage();
-    //}
+    if ($('#third_page').css('display') != 'none') {
+        prevStoryPage();
+    }
 });
