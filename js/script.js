@@ -1453,7 +1453,7 @@ function storeInPhone(data, category, id) {
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
         done_callback = cb;
         //alert('before');
-        download_10(storyId, storyCat);
+        //download_10(storyId, storyCat);
     }
 
     var loadComponents = function () {
@@ -1539,8 +1539,27 @@ function getStoryById(id, category) {
              localStorage.setItem('lastPageLoaded', 0);
              var thisStory = category + '_' + id;
              //alert('success');
-             //dm.remove('folder_a/folder_b', Log('complete delte'), Log('delete fail'));
+             //
+               
+             switch (category) {
+                 case 'leg': {
+                     dm.remove('TheLibrary/mash', Log('complete delte'), Log('delete fail'));
+                     dm.remove('TheLibrary/adv', Log('complete delte'), Log('delete fail'));
+                 } break;
+                 case 'mash': {
+                     dm.remove('TheLibrary/leg', Log('complete delte'), Log('delete fail'));
+                     dm.remove('TheLibrary/adv', Log('complete delte'), Log('delete fail'));
+                 } break;
+                 case 'adv': {
+                     dm.remove('TheLibrary/leg', Log('complete delte'), Log('delete fail'));
+                     dm.remove('TheLibrary/mash', Log('complete delte'), Log('delete fail'));
+                 } break;
+                 default: { } break;
+
+             }
+
              dm.create_r('TheLibrary/' + category + '/story' + id, Log('created successfully'));
+             download_10(storyId, storyCat);
              storeInPhone(data, category, id);
          }
      });
@@ -1599,14 +1618,16 @@ function downloadRest(storyId, storyCat, sounds, images) {
 
 $(document).on('swipeleft', function () {
     //next
-    if ($('#third_page').css('display') != 'none') {
-        nextStoryPage();
-    }
+    alert($('#third_page').css('display'));
+    //if ($('#third_page').css('display') != 'none') {
+    //    nextStoryPage();
+    //}
 });
 
 $(document).on('swiperight', function () {
     //prev
-    if ($('#third_page').css('display') != 'none') {
-        prevStoryPage();
-    }
+    alert($('#third_page').css('display'));
+    //if ($('#third_page').css('display') != 'none') {
+    //    prevStoryPage();
+    //}
 });
