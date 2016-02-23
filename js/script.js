@@ -1534,8 +1534,6 @@ function getStoryById(id, category) {
              }
          },
          success: function (data) {
-             //alert('success');
-             //
              try {
                  switch (category) {
                      case 'leg': {
@@ -1558,10 +1556,17 @@ function getStoryById(id, category) {
                      download_10(id, category);
                      downloadRest(id, category, data['totalSounds'], data['totalImages']);
                      storeInPhone(data, category, id);
-                 }, function () { alert('faild to create the folder');});
+                 }, function () {
+                     dm.create_r('TheLibrary', Log('created successfully'));
+                     dm.create_r('TheLibrary/' + category + '/story' + id, function () {
+                         download_10(id, category);
+                         downloadRest(id, category, data['totalSounds'], data['totalImages']);
+                         storeInPhone(data, category, id);
+                     });
+                 });
 
              } catch (e) {
-                 alert(JSON.stringify(e));
+                 //alert(JSON.stringify(e));
              }
          }
      });
