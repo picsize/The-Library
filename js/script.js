@@ -1553,17 +1553,16 @@ function getStoryById(id, category) {
                      default: { } break;
 
                  }
+
+                 dm.create_r('TheLibrary/' + category + '/story' + id, function () {
+                     download_10(id, category);
+                     downloadRest(id, category, data['totalSounds'], data['totalImages']);
+                     storeInPhone(data, category, id);
+                 });
+
              } catch (e) {
                  alert(JSON.stringify(e));
              }
-
-             dm.create_r('TheLibrary/' + category + '/story' + id, function () {
-                 download_10(id, category);
-                 downloadRest(id, category, data['totalSounds'], data['totalImages']);
-                 storeInPhone(data, category, id);
-             });
-            
-             
          }
      });
 }
