@@ -1539,16 +1539,16 @@ function getStoryById(id, category) {
              try {
                  switch (category) {
                      case 'leg': {
-                         dm.remove('TheLibrary/mash', Log('complete delte'), Log('delete fail'));
-                         dm.remove('TheLibrary/adv', Log('complete delte'), Log('delete fail'));
+                         dm.remove('TheLibrary/mash', function () { alert('d mash s'); }, function () { alert('d mash e'); });
+                         dm.remove('TheLibrary/adv', function () { alert('d adv s'); }, function () { alert('d adv e'); });
                      } break;
                      case 'mash': {
-                         dm.remove('TheLibrary/leg', Log('complete delte'), Log('delete fail'));
-                         dm.remove('TheLibrary/adv', Log('complete delte'), Log('delete fail'));
+                         dm.remove('TheLibrary/leg', function () { alert('d leg s'); }, function () { alert('d leg e'); });
+                         dm.remove('TheLibrary/adv', function () { alert('d adv s'); }, function () { alert('d adv e'); });
                      } break;
                      case 'adv': {
-                         dm.remove('TheLibrary/leg', Log('complete delte'), Log('delete fail'));
-                         dm.remove('TheLibrary/mash', Log('complete delte'), Log('delete fail'));
+                         dm.remove('TheLibrary/leg', function () { alert('d leg s'); }, function () { alert('d leg e'); });
+                         dm.remove('TheLibrary/mash', function () { alert('d mash s'); }, function () { alert('d mash e'); });
                      } break;
                      default: { } break;
 
