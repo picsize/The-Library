@@ -1554,7 +1554,7 @@ function getStoryById(id, category) {
 
                  }
              } catch (e) {
-                 //alert(JSON.stringify(e));
+                 alert(JSON.stringify(e));
              }
 
              dm.create_r('TheLibrary/' + category + '/story' + id, function () {
