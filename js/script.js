@@ -1535,38 +1535,40 @@ function getStoryById(id, category) {
          },
          success: function (data) {
              try {
-                 switch (category) {
-                     case 'leg': {
-                         dm.remove('TheLibrary/mash', function () { alert('d mash s'); }, function () { alert('d mash e'); });
-                         dm.remove('TheLibrary/adv', function () { alert('d adv s'); }, function () { alert('d adv e'); });
-                     } break;
-                     case 'mash': {
-                         dm.remove('TheLibrary/leg', function () { alert('d leg s'); }, function () { alert('d leg e'); });
-                         dm.remove('TheLibrary/adv', function () { alert('d adv s'); }, function () { alert('d adv e'); });
-                     } break;
-                     case 'adv': {
-                         dm.remove('TheLibrary/leg', function () { alert('d leg s'); }, function () { alert('d leg e'); });
-                         dm.remove('TheLibrary/mash', function () { alert('d mash s'); }, function () { alert('d mash e'); });
-                     } break;
-                     default: { } break;
+                 //switch (category) {
+                 //    case 'leg': {
+                 //        dm.remove('TheLibrary/mash', Log('deleted successfully'), Log('delete error'));
+                 //        dm.remove('TheLibrary/adv', Log('deleted successfully'), Log('delete error'));
+                 //    } break;
+                 //    case 'mash': {
+                 //        dm.remove('TheLibrary/leg', Log('deleted successfully'), Log('delete error'));
+                 //        dm.remove('TheLibrary/adv', Log('deleted successfully'), Log('delete error'));
+                 //    } break;
+                 //    case 'adv': {
+                 //        dm.remove('TheLibrary/leg', Log('deleted successfully'), Log('delete error'));
+                 //        dm.remove('TheLibrary/mash', Log('deleted successfully'), Log('delete error'));
+                 //    } break;
+                 //    default: { } break;
+                 //}
 
-                 }
-
-                 dm.create_r('TheLibrary/' + category + '/story' + id, function () {
-                     download_10(id, category);
-                     downloadRest(id, category, data['totalSounds'], data['totalImages']);
-                     storeInPhone(data, category, id);
-                 }, function () {
-                     dm.create_r('TheLibrary', Log('created successfully'));
+                 dm.remove('TheLibrary', function () {
                      dm.create_r('TheLibrary/' + category + '/story' + id, function () {
                          download_10(id, category);
                          downloadRest(id, category, data['totalSounds'], data['totalImages']);
                          storeInPhone(data, category, id);
+                     }, function () {
+                         dm.create_r('TheLibrary', Log('created successfully'));
+                         dm.create_r('TheLibrary/' + category + '/story' + id, function () {
+                             download_10(id, category);
+                             downloadRest(id, category, data['totalSounds'], data['totalImages']);
+                             storeInPhone(data, category, id);
+                         });
                      });
+                 }, function () {
+                     alert('error');
                  });
-
              } catch (e) {
-                 //alert(JSON.stringify(e));
+                 alert('catch');
              }
          }
      });
