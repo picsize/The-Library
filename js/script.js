@@ -1550,8 +1550,21 @@ function getStoryById(id, category) {
                  //    } break;
                  //    default: { } break;
                  //}
+                 $.mobile.loading("show", {
+                     text: 'הסיפור כבר מגיע',
+                     textVisible: true,
+                     theme: "a",
+                     html: ''
+                 });
 
                  dm.remove('TheLibrary', Log('deleted successfully'), Log('delete error'));
+
+                 $.mobile.loading("show", {
+                     text: 'הסיפור כבר מגיע',
+                     textVisible: true,
+                     theme: "a",
+                     html: ''
+                 });
 
                  dm.create_r('TheLibrary/' + category + '/story' + id, function () {
                      download_10(id, category);
