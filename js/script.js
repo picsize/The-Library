@@ -1447,7 +1447,7 @@ function storeInPhone(data, category, id) {
     storyObject.images = new Array();
     storyObject.sounds = new Array();
     storyCatGlobal = category;
-    count =8;
+    count =12;
     isFinishedImg = false;
     isFinishedSnd = false;
     var downloadStoryFiles = function (dataFromServer, storyCat, storyId, cb) {
